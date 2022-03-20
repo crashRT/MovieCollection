@@ -1,0 +1,14 @@
+{% if movie_list %}
+    <ul>
+        {% for movie in movie_list %}
+            <li>
+                <a href={% url 'detail' movie.id %}>
+                    {{ movie.link|safe }}
+                    <p>{{ movie.title }}</p>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No movies are available.</p>
+{% endif %}
