@@ -1,10 +1,5 @@
-from gc import collect
-from multiprocessing import context
-from operator import methodcaller
-from sqlite3 import paramstyle
-from tempfile import tempdir
 from django.shortcuts import get_object_or_404, redirect, render
-from django.http import HttpResponse
+from django.views.decorators.http import require_POST
 
 from .models import collection
 from .forms import add_movie
@@ -20,7 +15,7 @@ def detail(request, movie_id):
     movie = get_object_or_404(collection, pk=movie_id)
     return render(request, 'collection/detail.html', {'movie':movie})
 
-def form(request):
+def add(request):
     if request.method == 'POST':
         form = add_movie(request.POST)
         if form.is_valid():
@@ -30,3 +25,19 @@ def form(request):
         form = add_movie()
     return render(request, 'collection/form.html', {'form':form})
 
+def edit(request, movie_id):
+    info = get_object_or_404(collection, pk=movie_id)
+    if request.method == 'POST':
+        form = add_movie(request.POST, instance=info)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = add_movie(instance=info)
+    return render(request, 'collection/edit.html', {'form':form})
+
+@require_POST
+def delete_movie(request, movie_id):
+    info = get_object_or_404(collection, pk=movie_id)
+    info.delete()
+    return redirect('index')

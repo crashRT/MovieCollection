@@ -5,3 +5,7 @@
 <h2>{{ movie.creator }}</h2>
 
 <p>{{ movie.discription|linebreaksbr|urlize }}</p>
+
+<form method="post" action="{% url 'delete' movie.pk %}">{% csrf_token %}
+  <button class="" type="submit" >削除</button>
+</form>

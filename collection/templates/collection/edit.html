@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+
+<head></head>
+
+<body>
+    <h1>情報を編集</h1>
+    <!-- <form class="" action={% url 'index' %} method="post" enctype="multipart/form-data"> -->
+    <form method="POST" novalidate>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" name="submit">Update</button>
+    </form>
+</body>
+
+</html>
