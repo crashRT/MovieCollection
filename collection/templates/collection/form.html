@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+
+<head></head>
+
+<body>
+    <h1>映像作品の追加</h1>
+    <!-- <form class="" action={% url 'index' %} method="post" enctype="multipart/form-data"> -->
+    <form method="POST" novalidate>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" name="submit">Submit</button>
+    </form>
+</body>
+
+</html>
