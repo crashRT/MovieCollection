@@ -2,21 +2,26 @@ from gc import collect
 from multiprocessing import context
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
+from taggit.models import Tag
 
 from .models import collection
 from .forms import add_movie
 
 def index(requested):  
     collections = collection.objects.order_by('id')
+    taglist = Tag.objects.all()
     context = {
-        'movie_list':collections
+        'movie_list':collections,
+        'taglist':taglist,
     }
     return render(requested, 'collection/index.html', context)
 
 def taglist(requested, tagname):
     collections = collection.objects.filter(tags__name__in=[tagname]).distinct()
+    taglist = Tag.objects.all()
     context = {
-        'movie_list':collections
+        'movie_list':collections,
+        'taglist':taglist,
     }
     return render(requested, 'collection/index.html', context)
 

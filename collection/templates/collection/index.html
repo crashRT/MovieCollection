@@ -1,3 +1,20 @@
+{% if taglist %}
+    <ul>
+        <li>
+            <a href = {% url 'index' %}>
+                全て
+            </a>
+        </li>
+        {% for tag in taglist %}
+            <li>
+                <a href = {% url 'list' tag.name %}>
+                    {{ tag.name }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
 {% if movie_list %}
     <ul>
         {% for movie in movie_list %}
