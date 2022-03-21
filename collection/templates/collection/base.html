@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, user-scalable=yes">
+        <title>crashRT</title>
+
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+        {% block header %}
+        {% endblock header %}
+        <link rel="stylesheet" href="https://use.typekit.net/mwk7rug.css">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js"></script>
+
+        <meta name="author" content="crashRT" />
+
+    </head>
+
+    <body>
+
+
+        {% block content %}
+        {% endblock content %}
+    </body>
+</html>

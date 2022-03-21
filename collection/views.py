@@ -22,6 +22,7 @@ def taglist(requested, tagname):
     context = {
         'movie_list':collections,
         'taglist':taglist,
+        'tagname':tagname,
     }
     return render(requested, 'collection/index.html', context)
 
@@ -37,7 +38,12 @@ def add(request):
             return redirect('index')
     else:
         form = add_movie()
-    return render(request, 'collection/form.html', {'form':form})
+        taglist = Tag.objects.all()
+        context = {
+            'form':form,
+            'taglist':taglist,
+        }
+    return render(request, 'collection/form.html', context)
 
 def edit(request, movie_id):
     info = get_object_or_404(collection, pk=movie_id)
@@ -48,7 +54,13 @@ def edit(request, movie_id):
             return redirect('index')
     else:
         form = add_movie(instance=info)
-    return render(request, 'collection/edit.html', {'form':form})
+        taglist = Tag.objects.all()
+        context = {
+            'form':form,
+            'taglist':taglist,
+        }
+ 
+    return render(request, 'collection/edit.html', context)
 
 @require_POST
 def delete_movie(request, movie_id):

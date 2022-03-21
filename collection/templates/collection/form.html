@@ -1,16 +1,23 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base.html' %}
 
-<head></head>
+{% block header %}
+{% endblock header %}
 
-<body>
-    <h1>映像作品の追加</h1>
-    <!-- <form class="" action={% url 'index' %} method="post" enctype="multipart/form-data"> -->
-    <form method="POST" novalidate>
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" name="submit">Submit</button>
-    </form>
-</body>
+{% block content %}
+<h1>映像作品の追加</h1>
+<!-- <form class="" action={% url 'index' %} method="post" enctype="multipart/form-data"> -->
+<form method="POST" novalidate>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" name="submit">Submit</button>
+</form>
+<p>
+    タグ一覧：
+    {% if taglist %}
+    {% for tag in taglist %}
+    {{ tag.name }} |
+    {% endfor %}
+    {% endif %}
+</p>
 
-</html>
+{% endblock content %}

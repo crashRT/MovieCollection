@@ -1,3 +1,10 @@
+{% extends 'base.html' %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+
 <h1>{{ movie.title }}</h1>
 
 {{ movie.link|safe }}
@@ -6,6 +13,15 @@
 
 <p>{{ movie.discription|linebreaksbr|urlize }}</p>
 
+<a href="{% url 'edit' movie.pk %}">
+  <button>編集</button>
+</a>
 <form method="post" action="{% url 'delete' movie.pk %}">{% csrf_token %}
   <button class="" type="submit" >削除</button>
 </form>
+
+<a href="{% url 'index' %}">
+  一覧へ
+</a>
+
+{% endblock content %}

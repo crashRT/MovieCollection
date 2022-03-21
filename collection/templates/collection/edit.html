@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base.html' %}
 
-<head></head>
+{% block header %}
+{% endblock header %}
 
-<body>
+{% block content %}
     <h1>情報を編集</h1>
     <!-- <form class="" action={% url 'index' %} method="post" enctype="multipart/form-data"> -->
     <form method="POST" novalidate>
@@ -11,6 +11,13 @@
         {{ form.as_p }}
         <button type="submit" name="submit">Update</button>
     </form>
-</body>
+    <p>
+        タグ一覧：
+        {% if taglist %}
+        {% for tag in taglist %}
+        {{ tag.name }} |
+        {% endfor %}
+        {% endif %}
+    </p>
 
-</html>
+    {% endblock content %}
