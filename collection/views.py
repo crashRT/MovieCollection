@@ -26,6 +26,20 @@ def taglist(requested, tagname):
     }
     return render(requested, 'collection/index.html', context)
 
+def creators(request):
+    collections = collection.objects.order_by('creator')
+    context = {
+        'collections':collections,
+    }
+    return render(request, 'collection/creators.html', context)
+
+def creator_works(request, creator):
+    works = collection.objects.filter(creator__in=[creator]).distinct()
+    context = {
+        'movie_list':works,
+    }
+    return render(request, 'collection/index.html', context)
+
 def detail(request, movie_id):
     movie = get_object_or_404(collection, pk=movie_id)
     taglist = Tag.objects.all()

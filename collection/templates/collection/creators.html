@@ -1,0 +1,21 @@
+{% extends 'collection/base.html' %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+
+<h2>映像作家一覧</h2>
+
+{% if collections %}
+{% for object in collections %}
+
+<a href="{% url 'works' object.creator %}">
+    <p>{{ object.creator }}</p>
+</a>
+
+{% endfor %}
+{% endif %}
+
+
+{% endblock content %}
