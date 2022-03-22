@@ -7,31 +7,51 @@
 
 {% block content %}
 
-<a href="{% url 'add' %}">
-    <button>追加</button>
-</a>
+<header class="header">
+    <h1>Movie Collection</h1>
 
 
-{% if taglist %}
-<p>タグ一覧</p>
-<ul>
-    <li class="taglist">
-        <a class="taglist" href={% url 'index' %}>
-            全て
+    {% if taglist %}
+    <div class="taglist">
+        <p>タグ一覧</p>
+        <ul>
+            <li class="taglist">
+                <a class="taglist" href={% url 'index' %}>
+                    全て
+                </a>
+            </li>
+            {% for tag in taglist %}
+            <li class="taglist">
+                <a class="taglist" href={% url 'taglist' tag.name %}>
+                    {{ tag.name }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <div class="headerR">
+        <div class="button">
+            <a href="{% url 'add' %}">
+                <button>追加</button>
+            </a>
+        </div>
+        <a href="{% url 'creators' %}">
+            <div class="CreatorsLink">
+                <p class="CreatorsLink">映像作家一覧</p>
+            </div>
         </a>
-    </li>
-    {% for tag in taglist %}
-    <li class="taglist">
-        <a class="taglist" href={% url 'list' tag.name %}>
-            {{ tag.name }}
-        </a>
-    </li>
-    {% endfor %}
-</ul>
-{% endif %}
+    </div>
+
+</header>
 
 {% if tagname %}
-<h4>{{ tagname }}</h4>
+<h4>タグ：{{ tagname }}</h4>
+{% endif %}
+
+{% if creator %}
+<h4>映像作家：{{ creator }}</h4>
 {% endif %}
 
 {% if movie_list %}
@@ -41,7 +61,7 @@
         <div class="MovieCard">
             {{ movie.link|safe }}
 
-                <p>{{ movie.title }}</p>
+            <p>{{ movie.title }}</p>
         </div>
     </a>
     {% endfor %}

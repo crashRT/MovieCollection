@@ -28,15 +28,21 @@ def taglist(requested, tagname):
 
 def creators(request):
     collections = collection.objects.order_by('creator')
+    taglist = Tag.objects.all()
     context = {
         'collections':collections,
+        'taglist':taglist,
+
     }
     return render(request, 'collection/creators.html', context)
 
 def creator_works(request, creator):
     works = collection.objects.filter(creator__in=[creator]).distinct()
+    taglist = Tag.objects.all()
     context = {
         'movie_list':works,
+        'taglist':taglist,
+        'creator':creator,
     }
     return render(request, 'collection/index.html', context)
 

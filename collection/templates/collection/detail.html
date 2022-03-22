@@ -4,44 +4,62 @@
 {% endblock header %}
 
 {% block content %}
-<a href="{% url 'add' %}">
-    <button>追加</button>
-</a>
+
+<header class="header">
+    <h1>Movie Collection</h1>
 
 
-{% if taglist %}
-<p>タグ一覧</p>
-<ul>
-    <li class="taglist">
-        <a class="taglist" href={% url 'index' %}>
-          全て
+    {% if taglist %}
+    <div class="taglist">
+        <p>タグ一覧</p>
+        <ul>
+            <li class="taglist">
+                <a class="taglist" href={% url 'index' %}>
+                    全て
+                </a>
+            </li>
+            {% for tag in taglist %}
+            <li class="taglist">
+                <a class="taglist" href={% url 'taglist' tag.name %}>
+                    {{ tag.name }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <div class="headerR">
+        <div class="button">
+            <a href="{% url 'add' %}">
+                <button>追加</button>
+            </a>
+        </div>
+        <a href="{% url 'creators' %}">
+            <div class="CreatorsLink">
+                <p class="CreatorsLink">映像作家一覧</p>
+            </div>
         </a>
-    </li>
-    {% for tag in taglist %}
-    <li class="taglist">
-        <a class="taglist" href={% url 'list' tag.name %}>
-            {{ tag.name }}
-        </a>
-    </li>
-    {% endfor %}
-</ul>
-{% endif %}
+    </div>
 
+</header>
 
 <h1>{{ movie.title }}</h1>
 
 {{ movie.link|safe }}
 
-<h2>CREATOR: {{ movie.creator }}</h2>
+<h5>CREATOR: {{ movie.creator }}</h5>
 
 <p>{{ movie.discription|linebreaksbr|urlize }}</p>
 
+<div class="button">
 <a href="{% url 'edit' movie.pk %}">
   <button>編集</button>
 </a>
 <form method="post" action="{% url 'delete' movie.pk %}">{% csrf_token %}
   <button class="" type="submit" >削除</button>
 </form>
+</div>
 
 <a href="{% url 'index' %}">
   一覧へ
