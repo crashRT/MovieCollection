@@ -9,9 +9,14 @@
     width: 160px;
     margin: 10px;
     padding: 10px;
+    border-radius: 10px;
+    border-radius: 10px;
+    background: #eff0f1;
+    box-shadow:  5px 5px 13px #d5d6d6,
+                -5px -5px 13px #ffffff;            
 }
 
 iframe{
     width: 160px ;
-    height: 120px ;
+    height: 90px ;
 }

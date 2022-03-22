@@ -28,7 +28,12 @@ def taglist(requested, tagname):
 
 def detail(request, movie_id):
     movie = get_object_or_404(collection, pk=movie_id)
-    return render(request, 'collection/detail.html', {'movie':movie})
+    taglist = Tag.objects.all()
+    context = {
+        'movie':movie,
+        'taglist':taglist,
+    }
+    return render(request, 'collection/detail.html', context)
 
 def add(request):
     if request.method == 'POST':

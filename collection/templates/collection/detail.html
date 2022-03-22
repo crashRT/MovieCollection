@@ -4,12 +4,35 @@
 {% endblock header %}
 
 {% block content %}
+<a href="{% url 'add' %}">
+    <button>追加</button>
+</a>
+
+
+{% if taglist %}
+<p>タグ一覧</p>
+<ul>
+    <li class="taglist">
+        <a class="taglist" href={% url 'index' %}>
+          全て
+        </a>
+    </li>
+    {% for tag in taglist %}
+    <li class="taglist">
+        <a class="taglist" href={% url 'list' tag.name %}>
+            {{ tag.name }}
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+
 
 <h1>{{ movie.title }}</h1>
 
 {{ movie.link|safe }}
 
-<h2>{{ movie.creator }}</h2>
+<h2>CREATOR: {{ movie.creator }}</h2>
 
 <p>{{ movie.discription|linebreaksbr|urlize }}</p>
 

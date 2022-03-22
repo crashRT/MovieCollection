@@ -1,0 +1,57 @@
+body {
+  width: 1080px;
+  background-color: #eff0f1;
+  margin: 0 auto;
+}
+
+a {
+  color: #3e82f8;
+  text-decoration: none;
+}
+
+p {
+  color: #061838;
+  text-decoration: none;
+}
+
+/*ボタンのデザイン*/
+button {
+  appearance: none;
+  border: 0;
+  border-radius: 5px;
+  background: #eff0f1;
+  color: #10326b;
+  padding: 8px 16px;
+  margin: 10px;
+  font-size: 16px;
+  border: #e5e5e6 solid 1px;
+  box-shadow: 2px 2px 7px #b9bbbb, -2px -2px 7px #ffffff;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #10326b;
+  color: #eff0f1;
+}
+
+/*リストのデザイン*/
+li.taglist {
+  list-style-type: none;
+  display: inline;
+  padding: 5px 10px;
+  margin: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: #d7dbdf5b 1px solid;
+  background: #eff0f1;
+  box-shadow: 2px 2px 4px #e3e4e5, -2px -2px 4px #fbfcfd;
+}
+
+a.taglist {
+  color: #10326b;
+  text-decoration: none;
+}
+
+ul {
+  padding-left: 0;
+}

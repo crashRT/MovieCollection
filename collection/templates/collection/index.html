@@ -1,7 +1,7 @@
 {% extends 'collection/base.html' %}
 {% load static %}
 
-{% block header %}   
+{% block header %}
 <link rel="stylesheet" href="{% static 'css/list.css' %}" type="text/css">
 {% endblock header %}
 
@@ -13,15 +13,16 @@
 
 
 {% if taglist %}
+<p>タグ一覧</p>
 <ul>
-    <li>
-        <a href={% url 'index' %}>
+    <li class="taglist">
+        <a class="taglist" href={% url 'index' %}>
             全て
         </a>
     </li>
     {% for tag in taglist %}
-    <li>
-        <a href={% url 'list' tag.name %}>
+    <li class="taglist">
+        <a class="taglist" href={% url 'list' tag.name %}>
             {{ tag.name }}
         </a>
     </li>
@@ -36,13 +37,13 @@
 {% if movie_list %}
 <div class="MovieList">
     {% for movie in movie_list %}
-    <div class="MovieCard">
-        {{ movie.link|safe }}
+    <a href="{% url 'detail' movie.id %}">
+        <div class="MovieCard">
+            {{ movie.link|safe }}
 
-        <a href={% url 'detail' movie.id %}>
-            <p>{{ movie.title }}</p>
-        </a>
-    </div>
+                <p>{{ movie.title }}</p>
+        </div>
+    </a>
     {% endfor %}
 </div>
 {% else %}
