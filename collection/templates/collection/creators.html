@@ -44,25 +44,18 @@
 
 </header>
 
-<h1>{{ movie.title }}</h1>
 
-{{ movie.link|safe }}
+<h2>映像作家一覧</h2>
 
-<h5>CREATOR: {{ movie.creator }}</h5>
+{% if collections %}
+{% for object in collections %}
 
-<p>{{ movie.discription|linebreaksbr|urlize }}</p>
-
-<div class="button">
-<a href="{% url 'edit' movie.pk %}">
-  <button>編集</button>
+<a href="{% url 'works' object.creator %}">
+    <p>{{ object.creator }}</p>
 </a>
-<form method="post" action="{% url 'delete' movie.pk %}">{% csrf_token %}
-  <button class="" type="submit" >削除</button>
-</form>
-</div>
 
-<a href="{% url 'index' %}">
-  一覧へ
-</a>
+{% endfor %}
+{% endif %}
+
 
 {% endblock content %}
