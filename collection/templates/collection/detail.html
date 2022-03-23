@@ -52,17 +52,26 @@
 
 <p>{{ movie.discription|linebreaksbr|urlize }}</p>
 
+<p>タグ：
+{% for tag in tags %}
+{{ tag }}|
+{% endfor %}
+</p>
+
+
 <div class="button">
-<a href="{% url 'edit' movie.pk %}">
-  <button>編集</button>
-</a>
-<form method="post" action="{% url 'delete' movie.pk %}">{% csrf_token %}
-  <button class="" type="submit" >削除</button>
-</form>
+    <a href="{% url 'edit' movie.pk %}">
+        <button>編集</button>
+    </a>
+</div>
+<div class="button">
+    <form method="post" action="{% url 'delete' movie.pk %}">{% csrf_token %}
+        <button class="" type="submit">削除</button>
+    </form>
 </div>
 
 <a href="{% url 'index' %}">
-  一覧へ
+    一覧へ
 </a>
 
 {% endblock content %}

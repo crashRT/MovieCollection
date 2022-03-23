@@ -13,21 +13,23 @@
 
     {% if taglist %}
     <div class="taglist">
-        <p>タグ一覧</p>
+        <p class="taglist">タグ一覧</p>
+        <div class="taglistContainer">
         <ul>
-            <li class="taglist">
-                <a class="taglist" href={% url 'index' %}>
+            <a class="taglist" href={% url 'index' %}>
+                <li class="taglist">
                     全て
-                </a>
-            </li>
+                </li>
+            </a>
             {% for tag in taglist %}
-            <li class="taglist">
-                <a class="taglist" href={% url 'taglist' tag.name %}>
+            <a class="taglist" href={% url 'taglist' tag.name %}>
+                <li class="taglist">
                     {{ tag.name }}
-                </a>
-            </li>
+                </li>
+            </a>
             {% endfor %}
         </ul>
+        </div>
     </div>
     {% endif %}
 

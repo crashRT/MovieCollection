@@ -1,6 +1,8 @@
 {% extends 'collection/base.html' %}
+{% load static %}
 
 {% block header %}
+<link rel="stylesheet" href="{% static 'css/creators.css' %}" type="text/css">
 {% endblock header %}
 
 {% block content %}
@@ -48,13 +50,16 @@
 <h2>映像作家一覧</h2>
 
 {% if collections %}
-{% for object in collections %}
+<ul class="creators">
+    {% for object in collections %}
 
-<a href="{% url 'works' object.creator %}">
-    <p>{{ object.creator }}</p>
-</a>
-
-{% endfor %}
+    <li class="creators">
+        <a href="{% url 'works' object %}">
+            {{ object }}
+        </a>
+    </li>
+    {% endfor %}
+</ul>
 {% endif %}
 
 
