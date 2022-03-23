@@ -37,7 +37,7 @@ def creators(request):
     return render(request, 'collection/creators.html', context)
 
 def creator_works(request, creator):
-    works = collection.objects.filter(creator__in=[creator]).distinct()
+    works = collection.objects.filter(creator__icontains=creator).distinct()
     taglist = Tag.objects.all()
     context = {
         'movie_list':works,
