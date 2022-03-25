@@ -66,9 +66,9 @@
     </a>
 </div>
 <div class="button">
-    <form method="post" action="{% url 'delete' movie.pk %}">{% csrf_token %}
+    <a href="{% url 'delete_conf' movie.pk %}">
         <button class="" type="submit">削除</button>
-    </form>
+    </a>
 </div>
 
 <a href="{% url 'index' %}">

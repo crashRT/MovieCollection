@@ -1,0 +1,21 @@
+{% extends 'collection/base.html' %}
+
+{% block header %}
+{% endblock header %}
+
+
+{% block content %}
+
+<p>本当に{{ movie.title }}を削除しますか？</p>
+
+<div class="button">
+    <form method="post" action="{% url 'delete' movie.pk %}">{% csrf_token %}
+        <button class="" type="submit">削除</button>
+    </form>
+</div>
+<div class="button">
+    <a href="{% url 'detail' movie.pk %}">
+        <button class="">戻る</button>
+    </a>
+</div>
+{% endblock content %}

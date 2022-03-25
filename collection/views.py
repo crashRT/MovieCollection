@@ -89,6 +89,13 @@ def edit(request, movie_id):
  
     return render(request, 'collection/edit.html', context)
 
+def delete_conf(request, movie_id):
+    movie = get_object_or_404(collection, pk=movie_id)
+    context = {
+        'movie':movie,
+    }
+    return render(request, 'collection/delete.html', context)
+
 @require_POST
 def delete_movie(request, movie_id):
     info = get_object_or_404(collection, pk=movie_id)
