@@ -12,4 +12,5 @@ urlpatterns = [
     path('list/tag=<str:tagname>', views.taglist, name='taglist'),
     path('creators', views.creators, name='creators'),
     path('list/creator=<str:creator>', views.creator_works, name='works'),
+    path('delete-conf/<int:movie_id>', views.delete_conf, name='delete_conf'),
 ]
