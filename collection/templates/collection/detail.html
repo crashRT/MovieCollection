@@ -60,9 +60,9 @@
 <p>{{ movie.add_by }} が追加</p>
 
 <p>タグ：
-{% for tag in tags %}
-{{ tag }}|
-{% endfor %}
+    {% for tag in tags %}
+    {{ tag }}|
+    {% endfor %}
 
 </p>
 
@@ -79,7 +79,7 @@
 </div>
 
 <a href="{% url 'index' %}">
-    一覧へ
+    <p>TOPへ</p>
 </a>
 
 {% endblock content %}
