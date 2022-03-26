@@ -112,9 +112,24 @@ def detail(request, movie_id):
 def add(request):
     if request.method == 'POST':
         form = add_movie(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('index')
+        newLink = form.data['link']
+        if collection.objects.filter(link = newLink).exists():
+            if form.is_valid():
+                form.save()
+                return redirect('index')
+        else:
+            default_data = {'add_by':User.objects.get(pk=request.user.pk)}
+            form = add_movie(default_data)
+            taglist = Tag.objects.all()
+            notice = 'その作品は既に登録されています'
+            context = {
+                'notice':notice,
+                'form':form,
+                'taglist':taglist,
+            }
+            return render(request, 'collection/form.html', context)
+
+           
     else:
         default_data = {'add_by':User.objects.get(pk=request.user.pk)}
         form = add_movie(default_data)
