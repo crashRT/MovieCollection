@@ -7,6 +7,7 @@ class collection(models.Model):
     creator = models.CharField(max_length=100, null=True, blank=True)
     discription = models.TextField(null=True, blank=True)
     tags = TaggableManager(blank=True)
+    add_by = models.CharField(max_length=100)
 
     def __str__(self):
         return self.title

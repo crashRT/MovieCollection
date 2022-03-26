@@ -3,10 +3,57 @@ from multiprocessing import context
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 from taggit.models import Tag
+from django.contrib.auth.models import User
 
 from .models import collection
 from .forms import add_movie
 
+# ログイン用
+from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponseRedirect, HttpResponse
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+
+#ログイン
+def Login(request):
+    # POST
+    if request.method == 'POST':
+        # フォーム入力のユーザーID・パスワード取得
+        ID = request.POST.get('userid')
+        Pass = request.POST.get('password')
+
+        # Djangoの認証機能
+        user = authenticate(username=ID, password=Pass)
+
+        # ユーザー認証
+        if user:
+            #ユーザーアクティベート判定
+            if user.is_active:
+                # ログイン
+                login(request,user)
+                # ホームページ遷移
+                return HttpResponseRedirect(reverse('index'))
+            else:
+                # アカウント利用不可
+                return HttpResponse("アカウントが有効ではありません")
+        # ユーザー認証失敗
+        else:
+            return HttpResponse("ログインIDまたはパスワードが間違っています")
+    # GET
+    else:
+        return render(request, 'collection/login.html')
+
+
+#ログアウト
+@login_required
+def Logout(request):
+    logout(request)
+    # ログイン画面遷移
+    return HttpResponseRedirect(reverse('Login'))
+
+
+
+@login_required
 def index(requested):  
     collections = collection.objects.order_by('id')
     taglist = Tag.objects.all()
@@ -64,7 +111,8 @@ def add(request):
             form.save()
             return redirect('index')
     else:
-        form = add_movie()
+        default_data = {'add_by':User.objects.get(pk=request.user.pk)}
+        form = add_movie(default_data)
         taglist = Tag.objects.all()
         context = {
             'form':form,
