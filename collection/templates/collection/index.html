@@ -15,20 +15,20 @@
     <div class="taglist">
         <p class="taglist">タグ一覧</p>
         <div class="taglistContainer">
-        <ul>
-            <a class="taglist" href={% url 'index' %}>
-                <li class="taglist">
-                    全て
-                </li>
-            </a>
-            {% for tag in taglist %}
-            <a class="taglist" href={% url 'taglist' tag.name %}>
-                <li class="taglist">
-                    {{ tag.name }}
-                </li>
-            </a>
-            {% endfor %}
-        </ul>
+            <ul>
+                <a class="taglist" href={% url 'index' %}>
+                    <li class="taglist">
+                        全て
+                    </li>
+                </a>
+                {% for tag in taglist %}
+                <a class="taglist" href={% url 'taglist' tag.name %}>
+                    <li class="taglist">
+                        {{ tag.name }}
+                    </li>
+                </a>
+                {% endfor %}
+            </ul>
         </div>
     </div>
     {% endif %}
@@ -44,6 +44,11 @@
                 <p class="CreatorsLink">映像作家一覧</p>
             </div>
         </a>
+        {% if user.is_authenticated %}
+        <p>{{ user.get_username }}でログイン中</p>
+        {% else %}
+        <p>ログインしていません</p>
+        {% endif %}
     </div>
 
 </header>

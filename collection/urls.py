@@ -16,4 +16,5 @@ urlpatterns = [
     path('delete-conf/<int:movie_id>', views.delete_conf, name='delete_conf'),
     path('login', views.Login, name='Login'),
     path('logout', views.Logout, name='Logout')
+
 ]
