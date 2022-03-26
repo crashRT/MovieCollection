@@ -12,6 +12,7 @@ urlpatterns = [
     path('list/tag=<str:tagname>', views.taglist, name='taglist'),
     path('creators', views.creators, name='creators'),
     path('list/creator=<str:creator>', views.creator_works, name='works'),
+    path('delete_conf', views.delete_conf, name='delete_conf'),
     path('login', views.Login, name='Login'),
     path("logout", views.Logout, name="Logout"),
 ]
