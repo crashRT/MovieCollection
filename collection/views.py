@@ -63,6 +63,7 @@ def index(requested):
     }
     return render(requested, 'collection/index.html', context)
 
+@login_required
 def taglist(requested, tagname):
     collections = collection.objects.filter(tags__name__in=[tagname]).distinct()
     taglist = Tag.objects.all()
@@ -73,6 +74,7 @@ def taglist(requested, tagname):
     }
     return render(requested, 'collection/index.html', context)
 
+@login_required
 def creators(request):
     collections = collection.objects.order_by('creator').values_list('creator',flat=True).distinct()
     taglist = Tag.objects.all()
@@ -83,6 +85,7 @@ def creators(request):
     }
     return render(request, 'collection/creators.html', context)
 
+@login_required
 def creator_works(request, creator):
     works = collection.objects.filter(creator__icontains=creator).distinct()
     taglist = Tag.objects.all()
@@ -93,6 +96,7 @@ def creator_works(request, creator):
     }
     return render(request, 'collection/index.html', context)
 
+@login_required
 def detail(request, movie_id):
     movie = get_object_or_404(collection, pk=movie_id)
     taglist = Tag.objects.all()
@@ -104,6 +108,7 @@ def detail(request, movie_id):
     }
     return render(request, 'collection/detail.html', context)
 
+@login_required
 def add(request):
     if request.method == 'POST':
         form = add_movie(request.POST)
@@ -120,6 +125,7 @@ def add(request):
         }
     return render(request, 'collection/form.html', context)
 
+@login_required
 def edit(request, movie_id):
     info = get_object_or_404(collection, pk=movie_id)
     if request.method == 'POST':
@@ -137,6 +143,7 @@ def edit(request, movie_id):
  
     return render(request, 'collection/edit.html', context)
 
+@login_required
 def delete_conf(request, movie_id):
     movie = get_object_or_404(collection, pk=movie_id)
     context = {
