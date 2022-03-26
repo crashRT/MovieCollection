@@ -113,7 +113,7 @@ def add(request):
     if request.method == 'POST':
         form = add_movie(request.POST)
         newLink = form.data['link']
-        if collection.objects.filter(link = newLink).exists():
+        if not collection.objects.filter(link = newLink).exists():
             if form.is_valid():
                 form.save()
                 return redirect('index')
