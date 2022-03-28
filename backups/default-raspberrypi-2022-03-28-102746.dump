@@ -1,0 +1,1469 @@
+CREATE TABLE IF NOT EXISTS "auth_group" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(150) NOT NULL UNIQUE);
+CREATE UNIQUE INDEX "auth_group_permissions_group_id_permission_id_0cd325b0_uniq" ON "auth_group_permissions" ("group_id", "permission_id");
+CREATE INDEX IF NOT EXISTS "auth_group_permissions_group_id_b120cbf9" ON "auth_group_permissions" ("group_id");
+CREATE INDEX IF NOT EXISTS "auth_group_permissions_permission_id_84c5c92e" ON "auth_group_permissions" ("permission_id");
+CREATE UNIQUE INDEX "auth_user_groups_user_id_group_id_94350c0c_uniq" ON "auth_user_groups" ("user_id", "group_id");
+CREATE INDEX IF NOT EXISTS "auth_user_groups_user_id_6a12ed8b" ON "auth_user_groups" ("user_id");
+CREATE INDEX IF NOT EXISTS "auth_user_groups_group_id_97559544" ON "auth_user_groups" ("group_id");
+CREATE UNIQUE INDEX "auth_user_user_permissions_user_id_permission_id_14a6b632_uniq" ON "auth_user_user_permissions" ("user_id", "permission_id");
+CREATE INDEX IF NOT EXISTS "auth_user_user_permissions_user_id_a95ead1b" ON "auth_user_user_permissions" ("user_id");
+CREATE INDEX IF NOT EXISTS "auth_user_user_permissions_permission_id_1fbb5f2c" ON "auth_user_user_permissions" ("permission_id");
+CREATE INDEX IF NOT EXISTS "django_admin_log_content_type_id_c4bce8eb" ON "django_admin_log" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "django_admin_log_user_id_c564eba6" ON "django_admin_log" ("user_id");
+CREATE UNIQUE INDEX "django_content_type_app_label_model_76bd3d3b_uniq" ON "django_content_type" ("app_label", "model");
+CREATE UNIQUE INDEX "auth_permission_content_type_id_codename_01ab375a_uniq" ON "auth_permission" ("content_type_id", "codename");
+CREATE INDEX IF NOT EXISTS "auth_permission_content_type_id_2f476e4b" ON "auth_permission" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "django_session_expire_date_a5c62663" ON "django_session" ("expire_date");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_object_id_e2d7d1df" ON "taggit_taggeditem" ("object_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_content_type_id_9957a03c" ON "taggit_taggeditem" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_tag_id_f4f5b767" ON "taggit_taggeditem" ("tag_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_content_type_id_object_id_196cc965_idx" ON "taggit_taggeditem" ("content_type_id", "object_id");
+CREATE UNIQUE INDEX "taggit_taggeditem_content_type_id_object_id_tag_id_4bb97a8e_uniq" ON "taggit_taggeditem" ("content_type_id", "object_id", "tag_id");
+CREATE TABLE IF NOT EXISTS "auth_group_permissions" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "group_id" integer NOT NULL REFERENCES "auth_group" ("id") DEFERRABLE INITIALLY DEFERRED, "permission_id" integer NOT NULL REFERENCES "auth_permission" ("id") DEFERRABLE INITIALLY DEFERRED);
+CREATE UNIQUE INDEX "auth_group_permissions_group_id_permission_id_0cd325b0_uniq" ON "auth_group_permissions" ("group_id", "permission_id");
+CREATE INDEX IF NOT EXISTS "auth_group_permissions_group_id_b120cbf9" ON "auth_group_permissions" ("group_id");
+CREATE INDEX IF NOT EXISTS "auth_group_permissions_permission_id_84c5c92e" ON "auth_group_permissions" ("permission_id");
+CREATE UNIQUE INDEX "auth_user_groups_user_id_group_id_94350c0c_uniq" ON "auth_user_groups" ("user_id", "group_id");
+CREATE INDEX IF NOT EXISTS "auth_user_groups_user_id_6a12ed8b" ON "auth_user_groups" ("user_id");
+CREATE INDEX IF NOT EXISTS "auth_user_groups_group_id_97559544" ON "auth_user_groups" ("group_id");
+CREATE UNIQUE INDEX "auth_user_user_permissions_user_id_permission_id_14a6b632_uniq" ON "auth_user_user_permissions" ("user_id", "permission_id");
+CREATE INDEX IF NOT EXISTS "auth_user_user_permissions_user_id_a95ead1b" ON "auth_user_user_permissions" ("user_id");
+CREATE INDEX IF NOT EXISTS "auth_user_user_permissions_permission_id_1fbb5f2c" ON "auth_user_user_permissions" ("permission_id");
+CREATE INDEX IF NOT EXISTS "django_admin_log_content_type_id_c4bce8eb" ON "django_admin_log" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "django_admin_log_user_id_c564eba6" ON "django_admin_log" ("user_id");
+CREATE UNIQUE INDEX "django_content_type_app_label_model_76bd3d3b_uniq" ON "django_content_type" ("app_label", "model");
+CREATE UNIQUE INDEX "auth_permission_content_type_id_codename_01ab375a_uniq" ON "auth_permission" ("content_type_id", "codename");
+CREATE INDEX IF NOT EXISTS "auth_permission_content_type_id_2f476e4b" ON "auth_permission" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "django_session_expire_date_a5c62663" ON "django_session" ("expire_date");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_object_id_e2d7d1df" ON "taggit_taggeditem" ("object_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_content_type_id_9957a03c" ON "taggit_taggeditem" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_tag_id_f4f5b767" ON "taggit_taggeditem" ("tag_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_content_type_id_object_id_196cc965_idx" ON "taggit_taggeditem" ("content_type_id", "object_id");
+CREATE UNIQUE INDEX "taggit_taggeditem_content_type_id_object_id_tag_id_4bb97a8e_uniq" ON "taggit_taggeditem" ("content_type_id", "object_id", "tag_id");
+CREATE TABLE IF NOT EXISTS "auth_permission" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "content_type_id" integer NOT NULL REFERENCES "django_content_type" ("id") DEFERRABLE INITIALLY DEFERRED, "codename" varchar(100) NOT NULL, "name" varchar(255) NOT NULL);
+INSERT INTO "auth_permission" VALUES(1,1,'add_collection','Can add collection');
+INSERT INTO "auth_permission" VALUES(2,1,'change_collection','Can change collection');
+INSERT INTO "auth_permission" VALUES(3,1,'delete_collection','Can delete collection');
+INSERT INTO "auth_permission" VALUES(4,1,'view_collection','Can view collection');
+INSERT INTO "auth_permission" VALUES(5,2,'add_logentry','Can add log entry');
+INSERT INTO "auth_permission" VALUES(6,2,'change_logentry','Can change log entry');
+INSERT INTO "auth_permission" VALUES(7,2,'delete_logentry','Can delete log entry');
+INSERT INTO "auth_permission" VALUES(8,2,'view_logentry','Can view log entry');
+INSERT INTO "auth_permission" VALUES(9,3,'add_permission','Can add permission');
+INSERT INTO "auth_permission" VALUES(10,3,'change_permission','Can change permission');
+INSERT INTO "auth_permission" VALUES(11,3,'delete_permission','Can delete permission');
+INSERT INTO "auth_permission" VALUES(12,3,'view_permission','Can view permission');
+INSERT INTO "auth_permission" VALUES(13,4,'add_group','Can add group');
+INSERT INTO "auth_permission" VALUES(14,4,'change_group','Can change group');
+INSERT INTO "auth_permission" VALUES(15,4,'delete_group','Can delete group');
+INSERT INTO "auth_permission" VALUES(16,4,'view_group','Can view group');
+INSERT INTO "auth_permission" VALUES(17,5,'add_user','Can add user');
+INSERT INTO "auth_permission" VALUES(18,5,'change_user','Can change user');
+INSERT INTO "auth_permission" VALUES(19,5,'delete_user','Can delete user');
+INSERT INTO "auth_permission" VALUES(20,5,'view_user','Can view user');
+INSERT INTO "auth_permission" VALUES(21,6,'add_contenttype','Can add content type');
+INSERT INTO "auth_permission" VALUES(22,6,'change_contenttype','Can change content type');
+INSERT INTO "auth_permission" VALUES(23,6,'delete_contenttype','Can delete content type');
+INSERT INTO "auth_permission" VALUES(24,6,'view_contenttype','Can view content type');
+INSERT INTO "auth_permission" VALUES(25,7,'add_session','Can add session');
+INSERT INTO "auth_permission" VALUES(26,7,'change_session','Can change session');
+INSERT INTO "auth_permission" VALUES(27,7,'delete_session','Can delete session');
+INSERT INTO "auth_permission" VALUES(28,7,'view_session','Can view session');
+INSERT INTO "auth_permission" VALUES(29,8,'add_tag','Can add tag');
+INSERT INTO "auth_permission" VALUES(30,8,'change_tag','Can change tag');
+INSERT INTO "auth_permission" VALUES(31,8,'delete_tag','Can delete tag');
+INSERT INTO "auth_permission" VALUES(32,8,'view_tag','Can view tag');
+INSERT INTO "auth_permission" VALUES(33,9,'add_taggeditem','Can add tagged item');
+INSERT INTO "auth_permission" VALUES(34,9,'change_taggeditem','Can change tagged item');
+INSERT INTO "auth_permission" VALUES(35,9,'delete_taggeditem','Can delete tagged item');
+INSERT INTO "auth_permission" VALUES(36,9,'view_taggeditem','Can view tagged item');
+CREATE UNIQUE INDEX "auth_group_permissions_group_id_permission_id_0cd325b0_uniq" ON "auth_group_permissions" ("group_id", "permission_id");
+CREATE INDEX IF NOT EXISTS "auth_group_permissions_group_id_b120cbf9" ON "auth_group_permissions" ("group_id");
+CREATE INDEX IF NOT EXISTS "auth_group_permissions_permission_id_84c5c92e" ON "auth_group_permissions" ("permission_id");
+CREATE UNIQUE INDEX "auth_user_groups_user_id_group_id_94350c0c_uniq" ON "auth_user_groups" ("user_id", "group_id");
+CREATE INDEX IF NOT EXISTS "auth_user_groups_user_id_6a12ed8b" ON "auth_user_groups" ("user_id");
+CREATE INDEX IF NOT EXISTS "auth_user_groups_group_id_97559544" ON "auth_user_groups" ("group_id");
+CREATE UNIQUE INDEX "auth_user_user_permissions_user_id_permission_id_14a6b632_uniq" ON "auth_user_user_permissions" ("user_id", "permission_id");
+CREATE INDEX IF NOT EXISTS "auth_user_user_permissions_user_id_a95ead1b" ON "auth_user_user_permissions" ("user_id");
+CREATE INDEX IF NOT EXISTS "auth_user_user_permissions_permission_id_1fbb5f2c" ON "auth_user_user_permissions" ("permission_id");
+CREATE INDEX IF NOT EXISTS "django_admin_log_content_type_id_c4bce8eb" ON "django_admin_log" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "django_admin_log_user_id_c564eba6" ON "django_admin_log" ("user_id");
+CREATE UNIQUE INDEX "django_content_type_app_label_model_76bd3d3b_uniq" ON "django_content_type" ("app_label", "model");
+CREATE UNIQUE INDEX "auth_permission_content_type_id_codename_01ab375a_uniq" ON "auth_permission" ("content_type_id", "codename");
+CREATE INDEX IF NOT EXISTS "auth_permission_content_type_id_2f476e4b" ON "auth_permission" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "django_session_expire_date_a5c62663" ON "django_session" ("expire_date");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_object_id_e2d7d1df" ON "taggit_taggeditem" ("object_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_content_type_id_9957a03c" ON "taggit_taggeditem" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_tag_id_f4f5b767" ON "taggit_taggeditem" ("tag_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_content_type_id_object_id_196cc965_idx" ON "taggit_taggeditem" ("content_type_id", "object_id");
+CREATE UNIQUE INDEX "taggit_taggeditem_content_type_id_object_id_tag_id_4bb97a8e_uniq" ON "taggit_taggeditem" ("content_type_id", "object_id", "tag_id");
+CREATE TABLE IF NOT EXISTS "auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "last_login" datetime NULL, "is_superuser" bool NOT NULL, "username" varchar(150) NOT NULL UNIQUE, "last_name" varchar(150) NOT NULL, "email" varchar(254) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL, "first_name" varchar(150) NOT NULL);
+INSERT INTO "auth_user" VALUES(1,'pbkdf2_sha256$260000$eBqauDtwYw9QUQR5vHBGAX$qL1T1+jfsR5F6VWLQdg5UolTFCppsWj6hSMa2xQ+7SA=','2022-03-27 19:51:02.141158',1,'crashrt','','',1,1,'2022-02-12 17:40:13.775860','');
+CREATE UNIQUE INDEX "auth_group_permissions_group_id_permission_id_0cd325b0_uniq" ON "auth_group_permissions" ("group_id", "permission_id");
+CREATE INDEX IF NOT EXISTS "auth_group_permissions_group_id_b120cbf9" ON "auth_group_permissions" ("group_id");
+CREATE INDEX IF NOT EXISTS "auth_group_permissions_permission_id_84c5c92e" ON "auth_group_permissions" ("permission_id");
+CREATE UNIQUE INDEX "auth_user_groups_user_id_group_id_94350c0c_uniq" ON "auth_user_groups" ("user_id", "group_id");
+CREATE INDEX IF NOT EXISTS "auth_user_groups_user_id_6a12ed8b" ON "auth_user_groups" ("user_id");
+CREATE INDEX IF NOT EXISTS "auth_user_groups_group_id_97559544" ON "auth_user_groups" ("group_id");
+CREATE UNIQUE INDEX "auth_user_user_permissions_user_id_permission_id_14a6b632_uniq" ON "auth_user_user_permissions" ("user_id", "permission_id");
+CREATE INDEX IF NOT EXISTS "auth_user_user_permissions_user_id_a95ead1b" ON "auth_user_user_permissions" ("user_id");
+CREATE INDEX IF NOT EXISTS "auth_user_user_permissions_permission_id_1fbb5f2c" ON "auth_user_user_permissions" ("permission_id");
+CREATE INDEX IF NOT EXISTS "django_admin_log_content_type_id_c4bce8eb" ON "django_admin_log" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "django_admin_log_user_id_c564eba6" ON "django_admin_log" ("user_id");
+CREATE UNIQUE INDEX "django_content_type_app_label_model_76bd3d3b_uniq" ON "django_content_type" ("app_label", "model");
+CREATE UNIQUE INDEX "auth_permission_content_type_id_codename_01ab375a_uniq" ON "auth_permission" ("content_type_id", "codename");
+CREATE INDEX IF NOT EXISTS "auth_permission_content_type_id_2f476e4b" ON "auth_permission" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "django_session_expire_date_a5c62663" ON "django_session" ("expire_date");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_object_id_e2d7d1df" ON "taggit_taggeditem" ("object_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_content_type_id_9957a03c" ON "taggit_taggeditem" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_tag_id_f4f5b767" ON "taggit_taggeditem" ("tag_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_content_type_id_object_id_196cc965_idx" ON "taggit_taggeditem" ("content_type_id", "object_id");
+CREATE UNIQUE INDEX "taggit_taggeditem_content_type_id_object_id_tag_id_4bb97a8e_uniq" ON "taggit_taggeditem" ("content_type_id", "object_id", "tag_id");
+CREATE TABLE IF NOT EXISTS "auth_user_groups" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "group_id" integer NOT NULL REFERENCES "auth_group" ("id") DEFERRABLE INITIALLY DEFERRED);
+CREATE UNIQUE INDEX "auth_group_permissions_group_id_permission_id_0cd325b0_uniq" ON "auth_group_permissions" ("group_id", "permission_id");
+CREATE INDEX IF NOT EXISTS "auth_group_permissions_group_id_b120cbf9" ON "auth_group_permissions" ("group_id");
+CREATE INDEX IF NOT EXISTS "auth_group_permissions_permission_id_84c5c92e" ON "auth_group_permissions" ("permission_id");
+CREATE UNIQUE INDEX "auth_user_groups_user_id_group_id_94350c0c_uniq" ON "auth_user_groups" ("user_id", "group_id");
+CREATE INDEX IF NOT EXISTS "auth_user_groups_user_id_6a12ed8b" ON "auth_user_groups" ("user_id");
+CREATE INDEX IF NOT EXISTS "auth_user_groups_group_id_97559544" ON "auth_user_groups" ("group_id");
+CREATE UNIQUE INDEX "auth_user_user_permissions_user_id_permission_id_14a6b632_uniq" ON "auth_user_user_permissions" ("user_id", "permission_id");
+CREATE INDEX IF NOT EXISTS "auth_user_user_permissions_user_id_a95ead1b" ON "auth_user_user_permissions" ("user_id");
+CREATE INDEX IF NOT EXISTS "auth_user_user_permissions_permission_id_1fbb5f2c" ON "auth_user_user_permissions" ("permission_id");
+CREATE INDEX IF NOT EXISTS "django_admin_log_content_type_id_c4bce8eb" ON "django_admin_log" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "django_admin_log_user_id_c564eba6" ON "django_admin_log" ("user_id");
+CREATE UNIQUE INDEX "django_content_type_app_label_model_76bd3d3b_uniq" ON "django_content_type" ("app_label", "model");
+CREATE UNIQUE INDEX "auth_permission_content_type_id_codename_01ab375a_uniq" ON "auth_permission" ("content_type_id", "codename");
+CREATE INDEX IF NOT EXISTS "auth_permission_content_type_id_2f476e4b" ON "auth_permission" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "django_session_expire_date_a5c62663" ON "django_session" ("expire_date");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_object_id_e2d7d1df" ON "taggit_taggeditem" ("object_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_content_type_id_9957a03c" ON "taggit_taggeditem" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_tag_id_f4f5b767" ON "taggit_taggeditem" ("tag_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_content_type_id_object_id_196cc965_idx" ON "taggit_taggeditem" ("content_type_id", "object_id");
+CREATE UNIQUE INDEX "taggit_taggeditem_content_type_id_object_id_tag_id_4bb97a8e_uniq" ON "taggit_taggeditem" ("content_type_id", "object_id", "tag_id");
+CREATE TABLE IF NOT EXISTS "auth_user_user_permissions" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "permission_id" integer NOT NULL REFERENCES "auth_permission" ("id") DEFERRABLE INITIALLY DEFERRED);
+CREATE UNIQUE INDEX "auth_group_permissions_group_id_permission_id_0cd325b0_uniq" ON "auth_group_permissions" ("group_id", "permission_id");
+CREATE INDEX IF NOT EXISTS "auth_group_permissions_group_id_b120cbf9" ON "auth_group_permissions" ("group_id");
+CREATE INDEX IF NOT EXISTS "auth_group_permissions_permission_id_84c5c92e" ON "auth_group_permissions" ("permission_id");
+CREATE UNIQUE INDEX "auth_user_groups_user_id_group_id_94350c0c_uniq" ON "auth_user_groups" ("user_id", "group_id");
+CREATE INDEX IF NOT EXISTS "auth_user_groups_user_id_6a12ed8b" ON "auth_user_groups" ("user_id");
+CREATE INDEX IF NOT EXISTS "auth_user_groups_group_id_97559544" ON "auth_user_groups" ("group_id");
+CREATE UNIQUE INDEX "auth_user_user_permissions_user_id_permission_id_14a6b632_uniq" ON "auth_user_user_permissions" ("user_id", "permission_id");
+CREATE INDEX IF NOT EXISTS "auth_user_user_permissions_user_id_a95ead1b" ON "auth_user_user_permissions" ("user_id");
+CREATE INDEX IF NOT EXISTS "auth_user_user_permissions_permission_id_1fbb5f2c" ON "auth_user_user_permissions" ("permission_id");
+CREATE INDEX IF NOT EXISTS "django_admin_log_content_type_id_c4bce8eb" ON "django_admin_log" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "django_admin_log_user_id_c564eba6" ON "django_admin_log" ("user_id");
+CREATE UNIQUE INDEX "django_content_type_app_label_model_76bd3d3b_uniq" ON "django_content_type" ("app_label", "model");
+CREATE UNIQUE INDEX "auth_permission_content_type_id_codename_01ab375a_uniq" ON "auth_permission" ("content_type_id", "codename");
+CREATE INDEX IF NOT EXISTS "auth_permission_content_type_id_2f476e4b" ON "auth_permission" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "django_session_expire_date_a5c62663" ON "django_session" ("expire_date");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_object_id_e2d7d1df" ON "taggit_taggeditem" ("object_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_content_type_id_9957a03c" ON "taggit_taggeditem" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_tag_id_f4f5b767" ON "taggit_taggeditem" ("tag_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_content_type_id_object_id_196cc965_idx" ON "taggit_taggeditem" ("content_type_id", "object_id");
+CREATE UNIQUE INDEX "taggit_taggeditem_content_type_id_object_id_tag_id_4bb97a8e_uniq" ON "taggit_taggeditem" ("content_type_id", "object_id", "tag_id");
+CREATE TABLE IF NOT EXISTS "collection_collection" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "title" varchar(200) NOT NULL, "discription" text NULL, "creator" varchar(100) NULL, "link" text NULL, "add_by" varchar(100) NOT NULL);
+INSERT INTO "collection_collection" VALUES(1,'どりーみんチュチュ','『どりーみんチュチュ』
+MORE MORE JUMP！ × 巡音ルカ
+作詞：emon(Tes.)
+作曲：emon(Tes.)
+
+イラスト：モゲラッタ
+動画：ぷろっぷ
+
+公式サイト：https://pjsekai.sega.jp
+公式Twitter：@pj_sekai（ https://twitter.com/pj_sekai ）
+
+(C) SEGA
+(C) Colorful Palette Inc.
+(C) Crypton Future Media, INC. www.piapro.net
+商品名および社名は各社の登録商標です。','ぷろっぷ','<iframe width="560" height="315" src="https://www.youtube.com/embed/ZVnD_K972P8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(2,'New Day','作曲・編曲: emon(Tes.) 
+https://twitter.com/emon316
+
+作詞: Mes
+https://twitter.com/MesC
+
+ボーカル: 幽舞越山, hanser
+
+音源ミックス・マスターリング : 赵靖BIG.J@SBMS Beijing
+
+絵コンテ & Previz、編集: 加速サトウ
+キャラクターモデリング & リギング、アニメーション: 加速サトウ
+背景モデリング: 加速サトウ
+照明 & 合成: 加速サトウ
+https://twitter.com/ksk_st
+
+ダンスのモーション制作: 株式会社ソリッド・キューブ
+ダンス振付: 村上雅貴
+モーションアクティング: Jakko, 木須実怜花
+モーキャコーディネーション: 木原愛, 原田奈美
+モーキャスタジオ: 小箱合同会社
+
+監作: Mes
+監督: 平安夜的噩梦','加速サトウ','<iframe width="560" height="315" src="https://www.youtube.com/embed/_Oclr2bcjxg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(3,'Unleashed World','Music - sak feat.みゅい
+Illust - 球根
+BMS - http://manbow.nothing.sh/event/event....
+
+sak- https://twitter.com/sakofsuken
+みゅい - https://twitter.com/mayuminomoto
+球根 - https://twitter.com/kyukon_
+
+SpecialThanks 
+marirui67 - https://twitter.com/marirui67','げ～むばか','<iframe width="560" height="315" src="https://www.youtube.com/embed/XP1j45WXeA4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(5,'トリコロージュ','『トリコロージュ』
+25時、ナイトコードで。 × 初音ミク
+作詞：煮ル果実
+作曲：煮ル果実
+
+イラスト：豆の素
+動画：にへ
+
+公式サイト：https://pjsekai.sega.jp
+公式Twitter：@pj_sekai（ https://twitter.com/pj_sekai ）
+
+(C) SEGA
+(C) Colorful Palette Inc.
+(C) Crypton Future Media, INC. www.piapro.net
+商品名および社名は各社の登録商標です。','にへ','<iframe width="560" height="315" src="https://www.youtube.com/embed/M_ijFuoASt0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(6,'ray','『ray』
+ Leo/need × 初音ミク
+
+作詞：藤原 基央
+作曲：藤原 基央
+
+イラスト：咲の字。
+映像：イクミ
+
+公式サイト：https://pjsekai.sega.jp
+公式Twitter：@pj_sekai　( https://twitter.com/pj_sekai  )
+
+(C) SEGA
+(C) Colorful Palette Inc.
+(C) Crypton Future Media, INC. www.piapro.net
+商品名および社名は各社の登録商標です。','イクミ','<iframe width="560" height="315" src="https://www.youtube.com/embed/YkP0JMByjRM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(9,'ココロの質量','かめりあ / Camellia’s Vocaloid music "ココロの質量"[English : Mass of the Heart] Music Video.
+
+Music : かめりあ / Camellia
+cametek.jp/
+
+Illustration : TORO缶 / TORO-KAN
+pixiv.net/member.php?id=325736
+
+Direction : murAta Yuzi
+behance.net/m_Yz','murAtaYuzi','<iframe src="https://player.vimeo.com/video/116318344?h=a02391721e" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(10,'YOKU','Vocal：Eve
+Lyrics/Music：Eve
+Arrangement：Numa
+
+◇Animation
+
+Director/Storyboard/Character Design/Main Animator : Yoneyama Mai
+ 
+Compositor / VFX : tyao
+Background Art : Ozaki Imari
+YOKU effect Animation : Inaba Hideki
+CG Design : reika, Yamada Yusuke, TECH.
+Color Design/Color Checks/Painter : Ito Yui
+Key Animator : Nakamura Mayumi, tarou2, Rio, Chutana, syoiti, Majiro, Miyaso
+In-Between Animation : WIT STUDIO, TRIGGER, OLM, Studio EIGHT COLORS
+Production : P.I.C.S
+Production Manager : Matsutake Nao, Yamamoto Ruka','Yoneyama Mai','<iframe width="560" height="315" src="https://www.youtube.com/embed/w6G7Yfp1pVE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(11,'メタモリボン','『メタモリボン』
+MORE MORE JUMP！ × 鏡音リン
+作詞：emon(Tes.)・Tudiken
+作曲：emon(Tes.)
+
+イラスト：岩十
+動画：Yazhirushi
+
+公式サイト：https://pjsekai.sega.jp
+公式Twitter：@pj_sekai（ https://twitter.com/pj_sekai ）
+
+(C) SEGA
+(C) Colorful Palette Inc.
+(C) Crypton Future Media, INC. www.piapro.net
+商品名および社名は各社の登録商標です。','Yazhirushi','<iframe width="560" height="315" src="https://www.youtube.com/embed/0BHY0Gs0ZZM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(12,'ディメンション','わたしの大切な歌。仮想世界からあなたへ。
+
+---
+「ディメンション」
+歌唱：ヰ世界情緒
+作詞・作曲・編曲：柊マグネタイト（ https://twitter.com/hiiragi_magne ）
+
+ギター：C’Na（ https://twitter.com/CNa_Qe ）
+
+映像：まるいち（ https://twitter.com/yasai0827 ）
+タイポグラフィ：ZUMA（ https://twitter.com/Z_typmoe ）
+制作：根岸 秀幸（THINKR）
+
+Mix：＄ＫＩＹＡＫＩ＄ＫＩ
+---
+
+inst：https://piapro.jp/t/rA1n
+
+---
+
+2021.12.8リリース
+ヰ世界情緒 1st ALBUM「創生」
+Streaming & Download：https://lnk.to/isekaijoucho_creation
+CD：https://findmestore.thinkr.jp/blogs/f...
+
+==================
+
+ヰ世界情緒(いせかいじょうちょ)Twitter　https://twitter.com/isekaijoucho
+KAMITSUBAKI STUDIO　https://twitter.com/kamitsubaki_jp
+
+#ヰ世界情緒
+#ディメンション
+#KAMITSUBAKI_STUDIO','まるいち','<iframe width="560" height="315" src="https://www.youtube.com/embed/-x1Tyg2uvVM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(13,'Hand in Hand','原曲：Hand in Hand
+作詞・作曲：kz
+（ Twitter：https://twitter.com/kz_lt ）
+
+歌：リゼ・ヘルエスタ
+（Twitter：https://twitter.com/Lize_Helesta ）
+（YouTube：http://www.youtube.com/channel/UCZ1xu... ）
+
+動画制作：いちからスタッフ
+振付協力：株式会社ソリッド・キューブ
+タイポグラフィ協力：ろくんし
+（Twitter：https://twitter.com/Lon_comb ）','ろくんし','<iframe width="560" height="315" src="https://www.youtube.com/embed/h5ewNeJPDxM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(14,'命ばっかり','曲 / 命ばっかり - ぬゆり
+https://www.youtube.com/watch?v=YDnZF...
+
+映像 / けー','けー','<iframe width="560" height="315" src="https://www.youtube.com/embed/2kchDVX0cq0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(15,'境界 / Liminal','現実から覚める夢
+
+Music : "Vlawc" -  Calla Soiled
+CC BY-NC 2.1 JP','八重幸','<iframe width="560" height="315" src="https://www.youtube.com/embed/tDPpu71CO30" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(16,'うまぴょい伝説','■Original Song
+「うまぴょい伝説」
+作詞・作曲・編曲：Cygames(本田晃弘)
+------------------------------------------------------------------------------------------
+■歌ってみた動画クレジット
+Vocal：ぞん子
+　https://twitter.com/zone_eculture
+　
+Mix：ハンゾー（JaM Creations）
+　https://twitter.com/inaniwa_com
+
+Illustration：Luv
+　https://twitter.com/luvluvvox
+
+Video：安倉
+　https://twitter.com/yasucra
+------------------------------------------------------------------------------------------
+◆ZONe公式Twitter
+https://twitter.com/zone_energy_jp
+
+◆ZONe公式サイト
+https://zone-energy.jp/
+
+◆ZONeエナジー 購入はこちらから！
+https://www.amazon.co.jp/stores/ZONe/...
+
+#ウマ娘 #ZONeエナジー #歌ってみた #うまぴょい伝説','安倉','<iframe width="560" height="315" src="https://www.youtube.com/embed/9afYdq59ptI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(17,'ミルキー☆ハイウェイ','地球からすごく離れたところにある惑星間横断道路·ミルキー☆ハイウェイ。
+サイボーグのマキナと強化人間のチハルは週末の暇つぶしにドライブへ。
+二人が繰り広げる危険な迷惑運転、よい子はマネしちゃいけません！
+内容なし涙なし感動無し、勢いだけの新感覚なんちゃってサイバーパンク‼
+
+3D tool: blender
+SE: OtoLogic','Yohei☆Kameyama','<iframe width="560" height="315" src="https://www.youtube.com/embed/AYJrRakUyvg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(18,'les plumes','〈les plumesの配信はこちら〉https://mra.lnk.to/Xf6vfOM8
+
+TRINITYAiLEがNEXT VENUSグランプリ・セミファイナルで披露した楽曲「les plumes」のミュージックビデオを公開！
+
+『les plumes』
+作詞・作曲・編曲：kz
+唄：TRINITYAiLE
+天動瑠依（CV:雨宮天）、鈴村優（CV:麻倉もも）、奥山すみれ（CV:夏川椎菜）
+
+
+■MV Staff
+Director：土屋シィナ（QualiArts）
+Motion Graphic Designer：お菊 https://twitter.com/__Lizel
+Illustrator：alma https://twitter.com/alllma_original','土屋シィナ','<iframe width="560" height="315" src="https://www.youtube.com/embed/M3QDeARv2GA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(19,'ヒトガタ','Song by HITOGATA
+
+Original :HIMEHINA
+Covered Vocal : Amatsuki&96neko
+---------------------------------------------------------------------------
+
+
+
+
+HIMEHINAさんの「ヒトガタ」をふたりで歌わせていただきました。
+
+
+本家動画
+https://www.youtube.com/watch?v=J8PUU...
+
+◆Music：HIMEHINA
+◆Illustration：あっか@akka_0510
+◆Movie ： イクミ@ikumi_OH20 (WOAIb@_WOAIb)
+◆Mix：kain@kain2525 
+
+
+田中ヒメパート：天月 @_amatsuki_
+鈴木ヒナパート：96猫 ＠96__neko','イクミ','<iframe width="560" height="315" src="https://www.youtube.com/embed/d1lcin1CkXE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(20,'スノーパラダイス','Music  Snow paradise
+Song by Amatsuki
+
+———————————————————
+
+サブスク配信中！
+https://amatsuki.lnk.to/Snowparadise
+
+インスト⇨https://onl.la/VLkzVpn
+
+◆Vocal：天月
+◆Lyrics：渡辺拓也@takuya88699231&天月
+◆Music & Arrange：渡辺拓也
+
+◆Mix：kain@kain2525
+
+◆Illustration：CONACO@conaconaco6、ウーカタ@UuuktU
+◆Movie：イクミ@ikumi_OH20','イクミ','<iframe width="560" height="315" src="https://www.youtube.com/embed/EEMk0qtpxYM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(21,'secret piece','東方ボーカルアレンジサークル：イノライ
+
+Streaming & Download
+https://fanlink.to/gMyk
+
+曲名：secret piece
+原曲：虎柄の毘沙門天
+PV：カフウ
+
+4th Album「DESTINE ASH/love Love Scarlet」に収録。
+2019年12月31日 C97 南ナ27ab（森羅万象と合体スペース）にて頒布いたします。
+
+C97特設ページ
+http://www.ino-rai.com/0005.html
+
+
+「secret piece」
+
+原曲：虎柄の毘沙門天
+Vocal：怜花
+メロディーアレンジ：kaztora(森羅万象)
+編曲：ACTRock/Hedonist(森羅万象)
+作詞：ACTRock
+イラスト：cibo','カフウ','<iframe width="560" height="315" src="https://www.youtube.com/embed/ykTqOp24l0U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(22,'メルティランドナイトメア','『メルティランドナイトメア』
+作詞：はるまきごはん
+作曲：はるまきごはん
+
+公式サイト：https://pjsekai.sega.jp
+公式Twitter：@pj_sekai（ https://twitter.com/pj_sekai ）
+
+(C) SEGA
+(C) Colorful Palette Inc.
+(C) Crypton Future Media, INC. www.piapro.net
+商品名および社名は各社の登録商標です。','プロセカ','<iframe width="560" height="315" src="https://www.youtube.com/embed/ZKbnmy82DZE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(23,'躯樹の墓守','music：隣の庭は青い(庭師+Aoi)
+movie：鑓田(alpha complex)
+illust：藻','鑓田','<iframe width="560" height="315" src="https://www.youtube.com/embed/4WIvEU6jGzY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(24,'メルティランドナイトメア','Music & Words & Illust & Movie：はるまきごはん','はるまきごはん','<iframe width="560" height="315" src="https://www.youtube.com/embed/ZEy36W1xX8c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(25,'新世界','クリエイティブディレクター：川村元気
+監督：依田伸隆
+制作：10GAUGE
+スーパーバイズ：ボンズ
+スペシャルサンクス：LOTTE
+＿＿＿＿＿＿＿＿＿
+
+「ベイビーアイラブユーだぜ」アニメーション
+企画・プロデュース:川村元気 
+監督:松本理恵 
+キャラクターデザイン : 林祐己
+アニメーション制作:ボンズ
+＿＿＿＿＿＿＿＿＿
+
+BUMP OF CHICKEN「新世界」
+
+作詞・作曲：藤原基央
+編曲：BUMP OF CHICKEN & MOR','川村元気','<iframe width="560" height="315" src="https://www.youtube.com/embed/IQOhCvlkYps" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(26,'食虫植物','original：https://www.youtube.com/watch?v=F9eCS...
+movie：reiya  https://twitter.com/_eiya
+me：https://twitter.com/eumza1','reiya','<iframe width="560" height="315" src="https://www.youtube.com/embed/R4c2HJoVxjU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(27,'the EmpErroR','"the EmpErroR"
+
+Music / sasakure. UK  
+web　http://sasakure.uk.com/
+
+twitter　https://twitter.com/sasakure__UK
+
+
+Movie / ツツミヒデアキ
+twitter　https://twitter.com/jyuni_s_th
+
+
+
+maimai公式サイトhttp://maimai.sega.jp
+
+maimai公式twitter https://twitter.com/maimai_official
+
+ゲキ！チュウマイ合同twitter　 https://twitter.com/performai
+
+©SEGA','ツツミヒデアキ','<iframe width="560" height="315" src="https://www.youtube.com/embed/AcXpEKKaH8A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(28,'FORGOTTEN','FORGOTTEN
+Vocal：ermhoi (Black Boboi / millennium parade)]
+Music：Shinichi Osawa, RHYME, Kei Owada / Words：Shinichi Osawa, RHYME
+
+大沢伸一が自ら共作詞した、“変わってしまった世界、さらに変わっていく世界の中で、心の在処を探し続ける音楽の旅”というアルバムのテーマを反映した、”忘れているものを思い出そう”というメッセージ性の高い楽曲。
+
+ミュージックビデオの監督は話題のVRクラブ「GHOST CLUB」を主催するVRクリエーターの0b4k3（オバケ）。本日公開された2D版に加え360°版、彼の真骨頂でもあるVR版の３バージョンの制作が同時に進められており（随時公開予定）、リリックのメッセージ性をより拡張し、音楽体験の深度を深めていく新しい試みにチャレンジしている。
+
+
+STREAMING
+https://asab.lnk.to/mg_forgotten
+
+
+--------------------
+
+【MUSIC VIDEO】
+
+Director: 0b4k3 
+Motion graphics: yonayona graphics 
+Graphics Composite,Edit: Shigu 
+Concept Art: Rintaro 
+Technical Artist: tanitta 
+Visual Artist, Engineer: fotfla','0b4k3','<iframe width="560" height="315" src="https://www.youtube.com/embed/iNTh2NBBAts" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(29,'神っぽいな','original：https://www.youtube.com/watch?v=EHBFK...
+artwork：Oz  https://twitter.com/Oz01_
+
+movie：THE DOV  https://twitter.com/m_o__y_a
+
+me：https://twitter.com/eumza1','THE DOV','<iframe width="560" height="315" src="https://www.youtube.com/embed/u3J6wt3COGY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(30,'ロウワー','','hiro','<iframe width="560" height="315" src="https://www.youtube.com/embed/TZGJDfNvlzk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(31,'ZEROICHI','Movie : MaΔ 
+Music : "Daydreaming" by Ajjae is licensed under a CCLicense.
+Detail : https://mdlt7z.myportfolio.com/zeroichi
+
+
+一言 : デジタルに感謝～～
+
+Twitter : https://twitter.com/mdlt7z','MaΔ','<iframe width="560" height="315" src="https://www.youtube.com/embed/t8Rk-G_JtjY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(32,'ロストアンブレラ','限界合作とは？
+
+限界創作村 https://link.m86.work/genkaiv
+ で発足した合作企画
+参加者はみんな限界
+
+
+参加者一覧（再生順）
+
+1. mahinii 0:00 ~
+https://mahinii0.tumblr.com/
+
+
+2. 今芽。 0:10 ~
+https://twitter.com/_imame_
+
+
+3. ブー 0:19 ~
+https://twitter.com/Boo_12_13_B
+
+
+4. 再映 0:30 ~
+https://saia-graphics.tumblr.com/
+
+
+5. Dappy 0:41 ~
+https://twitter.com/_Dappy__
+
+
+6. レジェンド 0:51 ~
+https://twitter.com/Legendtomo_
+
+
+7. 安倉 1:01 ~
+https://twitter.com/yasucra
+
+
+8. みるく 1:12 ~
+https://twitter.com/MilK7G
+
+
+9. おたこ 1:20 ~
+https://twitter.com/012345rty
+
+
+10. TRAF 1:29 ~
+https://twitter.com/TRAFDACO
+
+
+11. Yurikago 1:36 ~
+https://twitter.com/Yurikago601
+
+
+12. MaΔ 1:48 ~
+https://twitter.com/mdlt7z
+
+
+13. Nisai 2:00 ~
+https://nisaiwork.tumblr.com/
+
+
+14. ぬれ 2:10 ~
+https://twitter.com/_tlahpsa
+
+
+15. ずんだもち 2:20 ~
+https://twitter.com/v_iv6
+
+
+16. すもるめ 2:30 ~
+https://twitter.com/Sumorume0321
+
+
+17. SOPI 2:39 ~
+https://twitter.com/Sopi_Eizo2
+
+
+18. Mintoll 2:49 ~
+https://twitter.com/Mintoll_Mov
+
+
+19. 巳波みなと 3:00 ~
+https://minato86.me
+
+
+20. くろまるさん 3:08 ~
+https://twitter.com/KRMRSN_
+
+
+
+楽曲
+稲葉曇 - ロストアンブレラ(yuigot Remix)
+https://www.youtube.com/watch?v=s7BJ2...
+
+素敵な楽曲をありがとうございます！
+
+
+運営補助
+ハクアを博愛する人
+https://twitter.com/hakua_loveEQ
+
+
+
+主催
+巳波みなと
+Twitter: https://twitter.com/minatoo86
+
+HP: https://minato86.me','限界合作','<iframe width="560" height="315" src="https://www.youtube.com/embed/TfAbTLwD6AA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(33,'Clumsy SHOT!','悦に浸る虫の曲です。
+
+■Music：ユラメ https://twitter.com/y_urame
+
+■Illustration：ひがん。https://twitter.com/higan_87_
+
+■Movie：青茶葉 https://twitter.com/Aochava_UP
+
+off vocal：https://piapro.jp/meringueP','青茶葉','<iframe width="560" height="315" src="https://www.youtube.com/embed/WmkUG4PkkoA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(34,'Realize','僕が君の全てを守るから。
+
+Original： Realize / 鈴木このみ
+作詞 作曲：篠崎あやと・橘亮祐
+
+Track&Mixing：2重跳び366回（https://twitter.com/2J366）
+
+Illust：柊暁生 (https://twitter.com/102_55
+)
+Movie：shuuya (https://twitter.com/Shuuya54
+)
+Cover design：ヱレキテルワークス (https://twitter.com/elekitel_works
+)
+
+△△▲道明寺ここあ/COCOA DOMYOJI▲△△
+
+▲Official Site▲
+https://cocoa-domyoji.com/
+
+
+▲Twitter▲
+　- 道明寺ここあ
+　　https://twitter.com/cocoa_domyoji
+
+　-RIOT MUSIC
+　　https://twitter.com/RIOTMUSIC_info
+
+
+▲TikTok▲
+https://www.tiktok.com/@cocoa_domyoji
+
+
+#道明寺ここあ #Realize #リゼロ #cover #歌ってみた','shuuya','<iframe width="560" height="315" src="https://www.youtube.com/embed/VZIY9hvdJhM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(35,'ミライチズ','────────────────────────
+
+本家様
+https://www.youtube.com/watch?v=8NQ3L...
+
+
+Mix：やっち（ https://twitter.com/Yc_nm0326
+  
+　　　　　　　https://t.co/qsxaz2mUuR　　）
+
+Movie：shuuya ( https://twitter.com/shuuya54
+ )
+Illust：あいなま（ https://twitter.com/ainama7
+ ）','shuuya','<iframe width="560" height="315" src="https://www.youtube.com/embed/_NMVRVFB0xw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(36,'モノドラマ','#VERSE_n #新人VTuber #VSinger #オリジナル曲
+
+決意
+
++++————————————————————————————————+++
+
+歌 : アルバ・セラ
+Vocal : Alba Sera
+https://twitter.com/sera_alb
+
+
+作詞 / 作曲 / 編曲 : 南雲ゆうき
+Compose / Lyrics / Arrangement : Yuki Nagumo
+https://twitter.com/nagumo_oyasumi
+
+
+ミックスエンジニア : 熊手徹 (BEAR HAND SOUND Inc.)
+Mixing Engineer : Tohru Kumade (BEAR HAND SOUND Inc.)
+https://twitter.com/LUCKY13KUMA
+
+
+映像 :二子石和耶 (maxilla)
+Movie : Kazuya Futagoshi (maxilla)
+https://twitter.com/nagominternet
+
+
+イラスト : 米室
+Illustration : yonemuro
+https://twitter.com/yosk6000
+
+
++++————————————————————————————————+++
+
+■VERSEⁿ 公式WEBサイト：https://verse-n.com/
+
+■VERSEⁿ 公式YouTubeチャンネル：https://www.youtube.com/channel/UCXPS...
+■VERSEⁿ 公式Twitterアカウント：https://twitter.com/verse_n_project','二子石和耶','<iframe width="560" height="315" src="https://www.youtube.com/embed/1fChYzCqc6E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(37,'last autumn','□Credit（敬称略）
+
+Vocal：SHUNA 
+Twitter ➡︎ https://twitter.com/3clover_shu
+
+YouTube ➡︎ https://www.youtube.com/SHUNA_3clover
+
+Tr1.(last autumn)Guitar：北島優実
+Twitter ➡︎ https://twitter.com/yuumi2346
+
+YouTube ➡︎ https://youtube.com/channel/UCBitOlxU...
+
+Mix & Mastering：さぶろう
+Twitter ➡︎ https://twitter.com/saburousan3263
+
+
+Illust：ひゅー
+Twitter ➡︎ https://twitter.com/sumikohyutan
+
+
+Movie：わっふゑ
+Twitter ➡︎ https://twitter.com/ks_wafflev0v
+
+YouTube ➡︎ https://youtube.com/user/wafflev0v
+
+Music：zephyr
+Twitter ➡︎ https://twitter.com/n_jolno_z
+
+YouTube ➡︎ https://youtube.com/channel/UCnI8l8ek...','わっふゑ','<iframe width="560" height="315" src="https://www.youtube.com/embed/NOo4R1R3BZY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(38,'夜のピエロ','ここなら沈んでもいいかも・・・★★★
+
+⬇︎Streaming & Download
+https://ado.lnk.to/yoru_reID
+
+
+■1st Album『狂言』特設サイト
+https://sp.universal-music.co.jp/ado/...
+
+
+■1st Album『狂言』予約リンク
+ado.lnk.to/kyogen
+
+
+⬇︎inst音源
+https://piapro.jp/t/r59p
+
+
+Vo：Ado 
+https://twitter.com/ado1024imokenp
+ 
+
+Music & Lyrics：biz 様
+https://twitter.com/biz_nuko
+
+
+Remix：TeddyLoid 様
+https://twitter.com/TeddyLoidSpace
+
+ 
+CREATIVE DIRECTOR
+野村志郎 様
+https://twitter.com/shirow09
+
+
+DIRECTOR
+荒牧康治 様
+https://twitter.com/ArmkKoji
+
+塚川功祐 様
+https://twitter.com/kske0427
+
+ 
+CHARACTER ILLUST
+ケイゴイノウエ 様
+https://twitter.com/mushiki_k
+
+ 
+ORIHARA 様
+https://twitter.com/ewkkyorhr
+
+リチャード君 様
+https://twitter.com/ri3939p
+
+KICO 様
+https://twitter.com/illmaticblue
+
+メレ 様
+https://twitter.com/mele_ck
+
+たいやき 様
+https://twitter.com/tight29
+ 
+
+ANIMATOR
+HUANG CHIEH 様
+菅野千愛 様
+吉岡優花 様
+高橋さなえ 様
+浅川真依 様
+天尾舞澄 様
+山口駿 様
+ 
+ANIMATION COORDINATE
+大嶋美穂 様
+ 
+CGI
+ALESSANDRO ASNAGHI  様
+井谷円香 様
+藤井直臣 様
+ 
+VFX
+小野龍一 様
+千木良凌 様
+
+TECHNICAL DESIGNER
+三瓶伶真 様
+近藤日明 様
+ 
+GRAPHIC DESIGNER
+加藤千明 様
+ 
+MOTION GRAPHIC DESIGN
+sankaku△ 様
+ 
+PRODUCER
+柏木裕介 様
+小泉楓 様
+安藤悠介 様
+星竜太 様
+ 
+PRODUCTION MANAGER
+相藤晃司 様
+吉原彩夏  様
+
+---------------------------------
+URL 
+・Twitter: https://twitter.com/ado1024imokenp
+ 
+・YouTube: https://www.youtube.com/c/Ado1024
+・TikTok: https://www.tiktok.com/@ado1024osenbei?
+ 
+・ユニバーサルミュージック公式ページ:　 https://www.universal-music.co.jp/ado/
+ 
+・プロフィール: https://cloud9pro.co.jp/artist/profil...
+
+-----------------------------------
+
+#Ado #夜のピエロ #Google 
+#IDISPLAYmusic #TeddyLoidRemix
+#ArtistOnTheRise #YouTubeMusic','野村志郎','<iframe width="560" height="315" src="https://www.youtube.com/embed/-KQAAeUTOQ4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(39,'Oarana','皆と私で叫ぶ歌。仮想世界からあなたへ。
+
+============
+Oarana / 春猿火 -アニメ「地球外少年少女」主題歌-
+
+歌唱：春猿火
+作詞・作曲・編曲：Vincent Diamante
+映像・タイトルロゴ：UDON
+
+============
+■アニメ「地球外少年少女」','UDON','<iframe width="560" height="315" src="https://www.youtube.com/embed/PZgW9ZmB150" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(40,'ノーペイン','4名の映像制作者と共に作った自主制作MVです。
+同じ楽曲の同じ部分を全員で作るというコンセプトの基制作しました。
+
+携わったクリエイターの方々（敬称略）
+0:16　津崎菓織
+https://twitter.com/k599914
+
+2:02　YuKiMuMa
+https://twitter.com/YuKiMuMa
+
+3:48　まめでん
+https://twitter.com/mamedenkun
+
+5:35　中絲悠
+https://twitter.com/Yu_Nakaito
+
+Music / ノーペイン - FLG4
+Youtube / https://www.youtube.com/watch?v=iSP5z...
+Twitter / https://twitter.com/FLG4_Music','津崎菓織, YuKiMuMa, まめでん, 中絲悠','<iframe width="560" height="315" src="https://www.youtube.com/embed/de0psh1_Fro" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(41,'ハッピーガール','','ふにゃ','<iframe width="560" height="315" src="https://www.youtube.com/embed/MOmhmETnVs0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(42,'KeK','Music : https://soundcloud.com/upscale-record...
+
+
+
+https://twitter.com/HAZUQU','木葉はづく','<iframe width="560" height="315" src="https://www.youtube.com/embed/48HhVMrWeYQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(43,'ラブヘイト','大嫌いだ
+
+Music Arrangement
+eba
+Lyrics
+藤林聖子 & 三枝明那
+
+Vocal：緑仙 
+https://t.co/OQhPMsxBXb
+
+https://twitter.com/midori_2434
+
+
+Mix
+よしけん
+https://twitter.com/yoshi_kennn
+
+
+illust
+きばどりリュー
+https://twitter.com/kibadori_rue
+
+
+Movie
+レネンhttps://twitter.com/rehythm
+
+しゅうへいhttps://twitter.com/2019401Reiwa','レネン, しゅうへい','<iframe width="560" height="315" src="https://www.youtube.com/embed/-cNay-ok_N0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(44,'Metronogik','BMS : https://manbow.nothing.sh/event/event...
+
+
+------------------
+music : Nasvine
+https://twitter.com/sato6gosix
+
+https://soundcloud.com/nasvine
+
+
+movie : noixy （ねくすなー）
+https://twitter.com/noixy_y
+
+------------------
+#BOFXVII #BGA','noixy','<iframe width="560" height="315" src="https://www.youtube.com/embed/Ir2wKOFgO14" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(45,'Poppy','THE BMS OF FIGHTERS XVII -VISION THE RETRO FUTURE- 参加作品
+Team:最鴿/Saika
+
+Poppy/Columba(Daily vs. Roon_kun)
+BMS: https://manbow.nothing.sh/event/event...
+
+
+Soundcloud: https://soundcloud.com/ovjffjrm6bqb/b...
+
+======
+Music: Daily
+https://twitter.com/daily197
+
+https://soundcloud.com/ovjffjrm6bqb
+
+
+Music: Roon_kun
+
+Illust: Axle
+https://twitter.com/Axles3
+
+https://www.pixiv.net/member.php?id=8...
+
+
+Movie: TRAF
+https://twitter.com/TRAFDACO
+
+======
+去年と同様にチームに誘ってくださりありがとうございます。','TRAF','<iframe width="560" height="315" src="https://www.youtube.com/embed/vJm5cJLoLfs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(46,'つめたいまちのおんなのこ','動画：みず希
+絵：おざき
+mix/mastering：まふまふ
+音楽:こんにちは谷田さん','みず希','<iframe width="560" height="315" src="https://www.youtube.com/embed/iV9s1utFmbQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(47,'チュルリラ・チュルリラ・ダッダッダ！','『チュルリラ・チュルリラ・ダッダッダ！』
+ワンダーランズ×ショウタイム
+作詞：和田たけあき(くらげP)
+作曲：和田たけあき(くらげP)
+
+イラスト：チェリ子
+動画：みず希
+
+公式サイト：https://pjsekai.sega.jp
+
+公式Twitter：@pj_sekai（ https://twitter.com/pj_sekai
+ ）
+
+(C) SEGA
+(C) Colorful Palette Inc.
+(C) Crypton Future Media, INC. www.piapro.net
+商品名および社名は各社の登録商標です。','みず希','<iframe width="560" height="315" src="https://www.youtube.com/embed/ZiZkXbivmh4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(48,'シリウスの心臓','わたしの大切な歌。仮想世界からあなたへ。
+
+---
+「シリウスの心臓」
+歌唱：ヰ世界情緒
+作詞・作曲・編曲：傘村トータ
+
+映像：UDON (VIXI) (https://twitter.com/udon_yt
+)
+
+Mix：＄ＫＩＹＡＫＩ＄ＫＩ
+--
+
+inst：https://piapro.jp/t/mDC5','UDON','<iframe width="560" height="315" src="https://www.youtube.com/embed/UKZt1vq8bKI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(49,'Howling','静寂に響いてよ、My Howling
+
+8月20日24:00～　配信開始！
+https://mio.streamlink.to/howling
+
+
+作詞: ZAQ (TaWaRa)
+作曲: ZAQ (TaWaRa)
+編曲: KanadeYUK (TaWaRa)
+歌唱：大神ミオ
+
+映像/監修：にへ
+キャラクターセットアップ：Lethe
+ロゴデザイン：Miu.
+
+Guitar：秋山健介
+Bass：小林修己
+Drums：ゆーまお（ヒトリエ）
+by the courtesy of Sony Music Labels Inc.
+Violin & Viola：小林明日香
+All Other Instruments & Programming：KanadeYUK (TaWaRa)
+Recording Studio：Studio Tanta、Studio Arte
+Recording Engineer：佐々木優（Studio Tanta）、菊池司（Arte Refact）
+Vocal Recording & Mixing Studio：Studio Arte
+Vocal Recording & Mixing Engineer：菊池司（Arte Refact）
+Sound Produced & Directed by 小濱信慶（Arte Refact）','にへ','<iframe width="560" height="315" src="https://www.youtube.com/embed/YPm9T622OX0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(50,'深淵','スマートフォン向けゲーム「ブラック・サージナイト」イメージソング
+ブラック・サージナイトHP：http://game.bilibili.co.jp/blacksurge...
+
+
+---
+「深淵 feat.花譜」
+歌唱：ヰ世界情緒・花譜
+作詞・作曲・編曲：香椎モイミ（ https://twitter.com/moi__moimi
+ ）
+Mix：＄ＫＩＹＡＫＩ＄ＫＩ
+
+Director / Typography
+ぬヴェントス（ https://twitter.com/NNNuventus
+ ）
+
+CG Director
+あるし（ https://twitter.com/Arcre8
+ ）
+
+Illustrator
+SOLANI（ https://twitter.com/drawing_account
+ ）
+晕欧欧（ https://twitter.com/Yunouou10
+ ）
+
+Title design
+eins [eins.blue]（ https://twitter.com/eins_blue
+ ）
+
+Producer　
+渡辺想介（ https://twitter.com/sosuke_watanabe
+ ）
+史耕（ https://twitter.com/osato_9g
+ ）
+
+Spcial thanks 
+アオイ 
+harapeco','あるし, ぬヴェントス','<iframe width="560" height="315" src="https://www.youtube.com/embed/kE9YpkWwHIo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(51,'深淵','■偉大なる本家様
+ヰ世界情緒 #13「深淵 feat.花譜」【オリジナルMV】
+https://youtu.be/kE9YpkWwHIo
+
+■mix
+tsi 様　(@mix_tsi)
+https://twitter.com/mix_tsi?lang=ja
+
+
+■movie
+kotose 様（@ro_kotose）
+https://twitter.com/ro_kotose
+
+
+■Illustration
+ぎむたろ 様（＠goriagim）
+https://twitter.com/goriagim
+
+
+■Vocal
+花鋏キョウ（＠Kyo_Hanabasami）
+https://twitter.com/Kyo_Hanabasami
+
+
+獅子神レオナ（@Leona_Shishigami）
+https://twitter.com/LeonaShishigami','kotose','<iframe width="560" height="315" src="https://www.youtube.com/embed/xut16hhB3AI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(52,'Strive against fate','title：Strive against fate
+artist：Noah
+movie：あるし
+
+音楽ゲーム『maimai でらっくす』　全国のゲームセンターで絶賛稼働中！
+------------------------------------------------------------------
+maimai でらっくす公式サイト　https://maimai.sega.jp/
+maimai でらっくす公式Twitter　https://twitter.com/maimai_official
+maimai でらっくす「宇宙すてーしょんちほー2」楽曲・再生リスト
+https://www.youtube.com/playlist?list...
+------------------------------------------------------------------','あるし','<iframe width="560" height="315" src="https://www.youtube.com/embed/fjL2ydTy1aM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+INSERT INTO "collection_collection" VALUES(53,'Okeanos','Okeanos / 凪原涼菜
+Okeanos / Suzuna Nagihara
+
+Vocal : Suzuna Nagihara (RIOT MUSIC)
+Music & Arrange : Bernis
+(https://twitter.com/CorBernis)
+Lyrics : Keisuke Matsuzaki
+(https://twitter.com/KeisukeM_Vega)
+
+Guitar: Minato Suzuya 
+(https://twitter.com/7suzuyami7)
+Bass: Tatsuki Sarada
+(https://twitter.com/tatukiintheuk)
+
+Mixing & Mastering Engineer : Bernis
+Recording at STUDIO ARNEST
+
+Video Director : あるし (https://twitter.com/Arcre8)
+Choreography Guidance : 一杯くらい良いじゃないですか
+(https://twitter.com/bakamerou)
+Artwork Design : ヱレキテルワークス (https://twitter.com/elekitel_works)
+
+Presented by RIOT MUSIC
+Executive Producer : Koki Takeda (https://twitter.com/RIOT_takedaP)
+Producer : Asa Suzuki
+Movie Director : Toshiaki Ono','あるし','<iframe width="560" height="315" src="https://www.youtube.com/embed/m-aKj8QNIJ0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','crashrt');
+CREATE UNIQUE INDEX "auth_group_permissions_group_id_permission_id_0cd325b0_uniq" ON "auth_group_permissions" ("group_id", "permission_id");
+CREATE INDEX IF NOT EXISTS "auth_group_permissions_group_id_b120cbf9" ON "auth_group_permissions" ("group_id");
+CREATE INDEX IF NOT EXISTS "auth_group_permissions_permission_id_84c5c92e" ON "auth_group_permissions" ("permission_id");
+CREATE UNIQUE INDEX "auth_user_groups_user_id_group_id_94350c0c_uniq" ON "auth_user_groups" ("user_id", "group_id");
+CREATE INDEX IF NOT EXISTS "auth_user_groups_user_id_6a12ed8b" ON "auth_user_groups" ("user_id");
+CREATE INDEX IF NOT EXISTS "auth_user_groups_group_id_97559544" ON "auth_user_groups" ("group_id");
+CREATE UNIQUE INDEX "auth_user_user_permissions_user_id_permission_id_14a6b632_uniq" ON "auth_user_user_permissions" ("user_id", "permission_id");
+CREATE INDEX IF NOT EXISTS "auth_user_user_permissions_user_id_a95ead1b" ON "auth_user_user_permissions" ("user_id");
+CREATE INDEX IF NOT EXISTS "auth_user_user_permissions_permission_id_1fbb5f2c" ON "auth_user_user_permissions" ("permission_id");
+CREATE INDEX IF NOT EXISTS "django_admin_log_content_type_id_c4bce8eb" ON "django_admin_log" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "django_admin_log_user_id_c564eba6" ON "django_admin_log" ("user_id");
+CREATE UNIQUE INDEX "django_content_type_app_label_model_76bd3d3b_uniq" ON "django_content_type" ("app_label", "model");
+CREATE UNIQUE INDEX "auth_permission_content_type_id_codename_01ab375a_uniq" ON "auth_permission" ("content_type_id", "codename");
+CREATE INDEX IF NOT EXISTS "auth_permission_content_type_id_2f476e4b" ON "auth_permission" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "django_session_expire_date_a5c62663" ON "django_session" ("expire_date");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_object_id_e2d7d1df" ON "taggit_taggeditem" ("object_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_content_type_id_9957a03c" ON "taggit_taggeditem" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_tag_id_f4f5b767" ON "taggit_taggeditem" ("tag_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_content_type_id_object_id_196cc965_idx" ON "taggit_taggeditem" ("content_type_id", "object_id");
+CREATE UNIQUE INDEX "taggit_taggeditem_content_type_id_object_id_tag_id_4bb97a8e_uniq" ON "taggit_taggeditem" ("content_type_id", "object_id", "tag_id");
+CREATE TABLE IF NOT EXISTS "django_admin_log" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "action_time" datetime NOT NULL, "object_id" text NULL, "object_repr" varchar(200) NOT NULL, "change_message" text NOT NULL, "content_type_id" integer NULL REFERENCES "django_content_type" ("id") DEFERRABLE INITIALLY DEFERRED, "user_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED, "action_flag" smallint unsigned NOT NULL CHECK ("action_flag" >= 0));
+INSERT INTO "django_admin_log" VALUES(1,'2022-03-19 14:49:54.109314','1','どりーみんチュチュ/MORE MORE JUMP！ × 巡音ルカ','[{"added": {}}]',1,1,1);
+INSERT INTO "django_admin_log" VALUES(2,'2022-03-19 14:57:11.144666','2','New Day','[{"added": {}}]',1,1,1);
+INSERT INTO "django_admin_log" VALUES(3,'2022-03-19 14:58:03.727981','3','Unleashed World','[{"added": {}}]',1,1,1);
+INSERT INTO "django_admin_log" VALUES(4,'2022-03-21 06:36:21.103547','4','ああ','',1,1,3);
+INSERT INTO "django_admin_log" VALUES(5,'2022-03-21 08:13:28.210425','1','かわいい','[{"changed": {"fields": ["Slug"]}}]',8,1,2);
+INSERT INTO "django_admin_log" VALUES(6,'2022-03-26 05:16:16.705869','52','Strive against fate','[{"changed": {"fields": ["Add by"]}}]',1,1,2);
+CREATE UNIQUE INDEX "auth_group_permissions_group_id_permission_id_0cd325b0_uniq" ON "auth_group_permissions" ("group_id", "permission_id");
+CREATE INDEX IF NOT EXISTS "auth_group_permissions_group_id_b120cbf9" ON "auth_group_permissions" ("group_id");
+CREATE INDEX IF NOT EXISTS "auth_group_permissions_permission_id_84c5c92e" ON "auth_group_permissions" ("permission_id");
+CREATE UNIQUE INDEX "auth_user_groups_user_id_group_id_94350c0c_uniq" ON "auth_user_groups" ("user_id", "group_id");
+CREATE INDEX IF NOT EXISTS "auth_user_groups_user_id_6a12ed8b" ON "auth_user_groups" ("user_id");
+CREATE INDEX IF NOT EXISTS "auth_user_groups_group_id_97559544" ON "auth_user_groups" ("group_id");
+CREATE UNIQUE INDEX "auth_user_user_permissions_user_id_permission_id_14a6b632_uniq" ON "auth_user_user_permissions" ("user_id", "permission_id");
+CREATE INDEX IF NOT EXISTS "auth_user_user_permissions_user_id_a95ead1b" ON "auth_user_user_permissions" ("user_id");
+CREATE INDEX IF NOT EXISTS "auth_user_user_permissions_permission_id_1fbb5f2c" ON "auth_user_user_permissions" ("permission_id");
+CREATE INDEX IF NOT EXISTS "django_admin_log_content_type_id_c4bce8eb" ON "django_admin_log" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "django_admin_log_user_id_c564eba6" ON "django_admin_log" ("user_id");
+CREATE UNIQUE INDEX "django_content_type_app_label_model_76bd3d3b_uniq" ON "django_content_type" ("app_label", "model");
+CREATE UNIQUE INDEX "auth_permission_content_type_id_codename_01ab375a_uniq" ON "auth_permission" ("content_type_id", "codename");
+CREATE INDEX IF NOT EXISTS "auth_permission_content_type_id_2f476e4b" ON "auth_permission" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "django_session_expire_date_a5c62663" ON "django_session" ("expire_date");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_object_id_e2d7d1df" ON "taggit_taggeditem" ("object_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_content_type_id_9957a03c" ON "taggit_taggeditem" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_tag_id_f4f5b767" ON "taggit_taggeditem" ("tag_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_content_type_id_object_id_196cc965_idx" ON "taggit_taggeditem" ("content_type_id", "object_id");
+CREATE UNIQUE INDEX "taggit_taggeditem_content_type_id_object_id_tag_id_4bb97a8e_uniq" ON "taggit_taggeditem" ("content_type_id", "object_id", "tag_id");
+CREATE TABLE IF NOT EXISTS "django_content_type" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "app_label" varchar(100) NOT NULL, "model" varchar(100) NOT NULL);
+INSERT INTO "django_content_type" VALUES(1,'collection','collection');
+INSERT INTO "django_content_type" VALUES(2,'admin','logentry');
+INSERT INTO "django_content_type" VALUES(3,'auth','permission');
+INSERT INTO "django_content_type" VALUES(4,'auth','group');
+INSERT INTO "django_content_type" VALUES(5,'auth','user');
+INSERT INTO "django_content_type" VALUES(6,'contenttypes','contenttype');
+INSERT INTO "django_content_type" VALUES(7,'sessions','session');
+INSERT INTO "django_content_type" VALUES(8,'taggit','tag');
+INSERT INTO "django_content_type" VALUES(9,'taggit','taggeditem');
+CREATE UNIQUE INDEX "auth_group_permissions_group_id_permission_id_0cd325b0_uniq" ON "auth_group_permissions" ("group_id", "permission_id");
+CREATE INDEX IF NOT EXISTS "auth_group_permissions_group_id_b120cbf9" ON "auth_group_permissions" ("group_id");
+CREATE INDEX IF NOT EXISTS "auth_group_permissions_permission_id_84c5c92e" ON "auth_group_permissions" ("permission_id");
+CREATE UNIQUE INDEX "auth_user_groups_user_id_group_id_94350c0c_uniq" ON "auth_user_groups" ("user_id", "group_id");
+CREATE INDEX IF NOT EXISTS "auth_user_groups_user_id_6a12ed8b" ON "auth_user_groups" ("user_id");
+CREATE INDEX IF NOT EXISTS "auth_user_groups_group_id_97559544" ON "auth_user_groups" ("group_id");
+CREATE UNIQUE INDEX "auth_user_user_permissions_user_id_permission_id_14a6b632_uniq" ON "auth_user_user_permissions" ("user_id", "permission_id");
+CREATE INDEX IF NOT EXISTS "auth_user_user_permissions_user_id_a95ead1b" ON "auth_user_user_permissions" ("user_id");
+CREATE INDEX IF NOT EXISTS "auth_user_user_permissions_permission_id_1fbb5f2c" ON "auth_user_user_permissions" ("permission_id");
+CREATE INDEX IF NOT EXISTS "django_admin_log_content_type_id_c4bce8eb" ON "django_admin_log" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "django_admin_log_user_id_c564eba6" ON "django_admin_log" ("user_id");
+CREATE UNIQUE INDEX "django_content_type_app_label_model_76bd3d3b_uniq" ON "django_content_type" ("app_label", "model");
+CREATE UNIQUE INDEX "auth_permission_content_type_id_codename_01ab375a_uniq" ON "auth_permission" ("content_type_id", "codename");
+CREATE INDEX IF NOT EXISTS "auth_permission_content_type_id_2f476e4b" ON "auth_permission" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "django_session_expire_date_a5c62663" ON "django_session" ("expire_date");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_object_id_e2d7d1df" ON "taggit_taggeditem" ("object_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_content_type_id_9957a03c" ON "taggit_taggeditem" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_tag_id_f4f5b767" ON "taggit_taggeditem" ("tag_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_content_type_id_object_id_196cc965_idx" ON "taggit_taggeditem" ("content_type_id", "object_id");
+CREATE UNIQUE INDEX "taggit_taggeditem_content_type_id_object_id_tag_id_4bb97a8e_uniq" ON "taggit_taggeditem" ("content_type_id", "object_id", "tag_id");
+CREATE TABLE IF NOT EXISTS "django_migrations" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "app" varchar(255) NOT NULL, "name" varchar(255) NOT NULL, "applied" datetime NOT NULL);
+INSERT INTO "django_migrations" VALUES(1,'contenttypes','0001_initial','2022-02-12 13:51:59.572375');
+INSERT INTO "django_migrations" VALUES(2,'auth','0001_initial','2022-02-12 13:51:59.610128');
+INSERT INTO "django_migrations" VALUES(3,'admin','0001_initial','2022-02-12 13:51:59.625528');
+INSERT INTO "django_migrations" VALUES(4,'admin','0002_logentry_remove_auto_add','2022-02-12 13:51:59.641268');
+INSERT INTO "django_migrations" VALUES(5,'admin','0003_logentry_add_action_flag_choices','2022-02-12 13:51:59.657862');
+INSERT INTO "django_migrations" VALUES(6,'contenttypes','0002_remove_content_type_name','2022-02-12 13:51:59.686502');
+INSERT INTO "django_migrations" VALUES(7,'auth','0002_alter_permission_name_max_length','2022-02-12 13:51:59.694480');
+INSERT INTO "django_migrations" VALUES(8,'auth','0003_alter_user_email_max_length','2022-02-12 13:51:59.710675');
+INSERT INTO "django_migrations" VALUES(9,'auth','0004_alter_user_username_opts','2022-02-12 13:51:59.727064');
+INSERT INTO "django_migrations" VALUES(10,'auth','0005_alter_user_last_login_null','2022-02-12 13:51:59.735330');
+INSERT INTO "django_migrations" VALUES(11,'auth','0006_require_contenttypes_0002','2022-02-12 13:51:59.743710');
+INSERT INTO "django_migrations" VALUES(12,'auth','0007_alter_validators_add_error_messages','2022-02-12 13:51:59.751765');
+INSERT INTO "django_migrations" VALUES(13,'auth','0008_alter_user_username_max_length','2022-02-12 13:51:59.774421');
+INSERT INTO "django_migrations" VALUES(14,'auth','0009_alter_user_last_name_max_length','2022-02-12 13:51:59.790888');
+INSERT INTO "django_migrations" VALUES(15,'auth','0010_alter_group_name_max_length','2022-02-12 13:51:59.802078');
+INSERT INTO "django_migrations" VALUES(16,'auth','0011_update_proxy_permissions','2022-02-12 13:51:59.808196');
+INSERT INTO "django_migrations" VALUES(17,'auth','0012_alter_user_first_name_max_length','2022-02-12 13:51:59.824616');
+INSERT INTO "django_migrations" VALUES(18,'collection','0001_initial','2022-02-12 13:51:59.833548');
+INSERT INTO "django_migrations" VALUES(19,'sessions','0001_initial','2022-02-12 13:51:59.849642');
+INSERT INTO "django_migrations" VALUES(20,'collection','0002_collection_discription','2022-02-12 17:57:17.620652');
+INSERT INTO "django_migrations" VALUES(21,'collection','0003_collection_creator_collection_link','2022-02-12 18:00:09.532592');
+INSERT INTO "django_migrations" VALUES(22,'collection','0004_alter_collection_creator','2022-03-20 08:12:54.531721');
+INSERT INTO "django_migrations" VALUES(23,'taggit','0001_initial','2022-03-21 08:03:29.099677');
+INSERT INTO "django_migrations" VALUES(24,'taggit','0002_auto_20150616_2121','2022-03-21 08:03:29.108625');
+INSERT INTO "django_migrations" VALUES(25,'taggit','0003_taggeditem_add_unique_index','2022-03-21 08:03:29.117771');
+INSERT INTO "django_migrations" VALUES(26,'taggit','0004_alter_taggeditem_content_type_alter_taggeditem_tag','2022-03-21 08:03:29.136945');
+INSERT INTO "django_migrations" VALUES(27,'collection','0005_collection_tags','2022-03-21 08:06:51.535775');
+INSERT INTO "django_migrations" VALUES(28,'collection','0006_collection_add_by','2022-03-26 05:13:00.517342');
+CREATE UNIQUE INDEX "auth_group_permissions_group_id_permission_id_0cd325b0_uniq" ON "auth_group_permissions" ("group_id", "permission_id");
+CREATE INDEX IF NOT EXISTS "auth_group_permissions_group_id_b120cbf9" ON "auth_group_permissions" ("group_id");
+CREATE INDEX IF NOT EXISTS "auth_group_permissions_permission_id_84c5c92e" ON "auth_group_permissions" ("permission_id");
+CREATE UNIQUE INDEX "auth_user_groups_user_id_group_id_94350c0c_uniq" ON "auth_user_groups" ("user_id", "group_id");
+CREATE INDEX IF NOT EXISTS "auth_user_groups_user_id_6a12ed8b" ON "auth_user_groups" ("user_id");
+CREATE INDEX IF NOT EXISTS "auth_user_groups_group_id_97559544" ON "auth_user_groups" ("group_id");
+CREATE UNIQUE INDEX "auth_user_user_permissions_user_id_permission_id_14a6b632_uniq" ON "auth_user_user_permissions" ("user_id", "permission_id");
+CREATE INDEX IF NOT EXISTS "auth_user_user_permissions_user_id_a95ead1b" ON "auth_user_user_permissions" ("user_id");
+CREATE INDEX IF NOT EXISTS "auth_user_user_permissions_permission_id_1fbb5f2c" ON "auth_user_user_permissions" ("permission_id");
+CREATE INDEX IF NOT EXISTS "django_admin_log_content_type_id_c4bce8eb" ON "django_admin_log" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "django_admin_log_user_id_c564eba6" ON "django_admin_log" ("user_id");
+CREATE UNIQUE INDEX "django_content_type_app_label_model_76bd3d3b_uniq" ON "django_content_type" ("app_label", "model");
+CREATE UNIQUE INDEX "auth_permission_content_type_id_codename_01ab375a_uniq" ON "auth_permission" ("content_type_id", "codename");
+CREATE INDEX IF NOT EXISTS "auth_permission_content_type_id_2f476e4b" ON "auth_permission" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "django_session_expire_date_a5c62663" ON "django_session" ("expire_date");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_object_id_e2d7d1df" ON "taggit_taggeditem" ("object_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_content_type_id_9957a03c" ON "taggit_taggeditem" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_tag_id_f4f5b767" ON "taggit_taggeditem" ("tag_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_content_type_id_object_id_196cc965_idx" ON "taggit_taggeditem" ("content_type_id", "object_id");
+CREATE UNIQUE INDEX "taggit_taggeditem_content_type_id_object_id_tag_id_4bb97a8e_uniq" ON "taggit_taggeditem" ("content_type_id", "object_id", "tag_id");
+CREATE TABLE IF NOT EXISTS "django_session" ("session_key" varchar(40) NOT NULL PRIMARY KEY, "session_data" text NOT NULL, "expire_date" datetime NOT NULL);
+INSERT INTO "django_session" VALUES('j89s9vqu8avygdapqxo82f71cvgpa3md','.eJxVjMsOwiAQRf-FtSFUKA-X7v0GMsMMUjWQlHZl_HfbpAvd3nPOfYsI61Li2nmOE4mLGMTpd0NIT647oAfUe5Op1WWeUO6KPGiXt0b8uh7u30GBXrY6E3pKgdmPCpJ22aQAqM-GvfMmW5UyWk2emRVaA5tvmWxwA2keQYnPFyBaOWQ:1nIwZQ:lw2DXqnILpAFGdu69uPZMECFlwhFM7hXnZsTtQr7MoM','2022-02-26 17:52:28.259890');
+INSERT INTO "django_session" VALUES('34xbcqqfv7613an7pw4xmyn2fi4y30s0','.eJxVjMsOwiAQRf-FtSFUKA-X7v0GMsMMUjWQlHZl_HfbpAvd3nPOfYsI61Li2nmOE4mLGMTpd0NIT647oAfUe5Op1WWeUO6KPGiXt0b8uh7u30GBXrY6E3pKgdmPCpJ22aQAqM-GvfMmW5UyWk2emRVaA5tvmWxwA2keQYnPFyBaOWQ:1nVaNn:_fT1u1qYMuYqC__P7_coEP8KuZqpG8NFQ3o-oX6dngQ','2022-04-02 14:48:43.822583');
+INSERT INTO "django_session" VALUES('gctbiukj9n451wg5aneyzl8b75mn47e7','.eJxVjMsOwiAQRf-FtSFUKA-X7v0GMsMMUjWQlHZl_HfbpAvd3nPOfYsI61Li2nmOE4mLGMTpd0NIT647oAfUe5Op1WWeUO6KPGiXt0b8uh7u30GBXrY6E3pKgdmPCpJ22aQAqM-GvfMmW5UyWk2emRVaA5tvmWxwA2keQYnPFyBaOWQ:1nXzIj:o0jNJysfvW8Wh0oMCv3bSOn7cA5MGCQldoVo9tfORjs','2022-04-09 05:49:25.345500');
+INSERT INTO "django_session" VALUES('0afqx84x6cjdx5t7ei57unhyyahjaoxa','.eJxVjDsOwjAQBe_iGlnx-oOWkp4zWLteGweQI8VJFXF3iJQC2jczb1OR1qXGtec5jqIuyqjT78aUnrntQB7U7pNOU1vmkfWu6IN2fZskv66H-3dQqddv7cgVCUMJZyAAssnZwN6Qs4A-JOEsyAgYQLz1kiHjgIGZAcUVY9X7A94rN88:1nYWhc:8JiqOJTyS4trNdxYJx-1lBFnn1kpuPUqnWq9qUc-nAs','2022-04-10 17:29:20.483902');
+INSERT INTO "django_session" VALUES('uqqm28fmxov92cym1ejbpt1kmv2cdq0f','.eJxVjEEOwiAQRe_C2hDGgZa6dN8zkJkBpGpoUtqV8e7apAvd_vfef6lA21rC1tISpqguCtTpd2OSR6o7iHeqt1nLXNdlYr0r-qBNj3NMz-vh_h0UauVbZ4AkBlzvnUPyEQjNEJEhdyD5zJZ742zMYCVbbwFNx8gDeGcExbJ6fwDQvDdT:1nYWyQ:2ONtbm0Rn2lSKCpKmguFtJHkLrqFna3LELn7LSRE50c','2022-04-10 17:46:42.690167');
+INSERT INTO "django_session" VALUES('6qpuw9sdlskx7vh05two26w7ks2nckv6','.eJxVjEEOwiAQRe_C2hDGgZa6dN8zkJkBpGpoUtqV8e7apAvd_vfef6lA21rC1tISpqguCtTpd2OSR6o7iHeqt1nLXNdlYr0r-qBNj3NMz-vh_h0UauVbZ4AkBlzvnUPyEQjNEJEhdyD5zJZ742zMYCVbbwFNx8gDeGcExbJ6fwDQvDdT:1nYWtX:8853bGHuKtqRJ8waA44lWjBtVianLmxX1cj6JDypkcc','2022-04-10 17:41:39.675937');
+INSERT INTO "django_session" VALUES('iry7vhtkgx4oh2xgy5t3a2cnfcwlptsl','.eJxVjEEOwiAQRe_C2hDGgZa6dN8zkJkBpGpoUtqV8e7apAvd_vfef6lA21rC1tISpqguCtTpd2OSR6o7iHeqt1nLXNdlYr0r-qBNj3NMz-vh_h0UauVbZ4AkBlzvnUPyEQjNEJEhdyD5zJZ742zMYCVbbwFNx8gDeGcExbJ6fwDQvDdT:1nYWuE:hF1GpFBuubi1OfOuzZUId6vttB4o9WiTXsYLkdlHlRk','2022-04-10 17:42:22.405717');
+INSERT INTO "django_session" VALUES('ua4c486lixo6e16yfqr9u4fr0xuspkkj','.eJxVjEEOwiAQRe_C2hDGgZa6dN8zkJkBpGpoUtqV8e7apAvd_vfef6lA21rC1tISpqguCtTpd2OSR6o7iHeqt1nLXNdlYr0r-qBNj3NMz-vh_h0UauVbZ4AkBlzvnUPyEQjNEJEhdyD5zJZ742zMYCVbbwFNx8gDeGcExbJ6fwDQvDdT:1nYWuw:K6NZ8YG_lacUqM0_p4MfwlLE6sCGrHjSKkgrXknEHsY','2022-04-10 17:43:06.010349');
+INSERT INTO "django_session" VALUES('8p33fieo1jzs6f5xw8k9e1tp18ubyfcx','.eJxVjEEOwiAQRe_C2hDGgZa6dN8zkJkBpGpoUtqV8e7apAvd_vfef6lA21rC1tISpqguCtTpd2OSR6o7iHeqt1nLXNdlYr0r-qBNj3NMz-vh_h0UauVbZ4AkBlzvnUPyEQjNEJEhdyD5zJZ742zMYCVbbwFNx8gDeGcExbJ6fwDQvDdT:1nYWvN:wJQOz2S4TXJ2WpNHA6uQjgPDFS5k1oQjXAFLTRDKx8M','2022-04-10 17:43:33.285307');
+INSERT INTO "django_session" VALUES('awqahabcn29iojzl6czbuk9706i0tght','.eJxVjEEOwiAQRe_C2hDGgZa6dN8zkJkBpGpoUtqV8e7apAvd_vfef6lA21rC1tISpqguCtTpd2OSR6o7iHeqt1nLXNdlYr0r-qBNj3NMz-vh_h0UauVbZ4AkBlzvnUPyEQjNEJEhdyD5zJZ742zMYCVbbwFNx8gDeGcExbJ6fwDQvDdT:1nYYuk:73go0Z082Ucr1yRODst5IUyEG55qp3tE041n4Wi273Y','2022-04-10 19:51:02.156663');
+CREATE UNIQUE INDEX "auth_group_permissions_group_id_permission_id_0cd325b0_uniq" ON "auth_group_permissions" ("group_id", "permission_id");
+CREATE INDEX IF NOT EXISTS "auth_group_permissions_group_id_b120cbf9" ON "auth_group_permissions" ("group_id");
+CREATE INDEX IF NOT EXISTS "auth_group_permissions_permission_id_84c5c92e" ON "auth_group_permissions" ("permission_id");
+CREATE UNIQUE INDEX "auth_user_groups_user_id_group_id_94350c0c_uniq" ON "auth_user_groups" ("user_id", "group_id");
+CREATE INDEX IF NOT EXISTS "auth_user_groups_user_id_6a12ed8b" ON "auth_user_groups" ("user_id");
+CREATE INDEX IF NOT EXISTS "auth_user_groups_group_id_97559544" ON "auth_user_groups" ("group_id");
+CREATE UNIQUE INDEX "auth_user_user_permissions_user_id_permission_id_14a6b632_uniq" ON "auth_user_user_permissions" ("user_id", "permission_id");
+CREATE INDEX IF NOT EXISTS "auth_user_user_permissions_user_id_a95ead1b" ON "auth_user_user_permissions" ("user_id");
+CREATE INDEX IF NOT EXISTS "auth_user_user_permissions_permission_id_1fbb5f2c" ON "auth_user_user_permissions" ("permission_id");
+CREATE INDEX IF NOT EXISTS "django_admin_log_content_type_id_c4bce8eb" ON "django_admin_log" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "django_admin_log_user_id_c564eba6" ON "django_admin_log" ("user_id");
+CREATE UNIQUE INDEX "django_content_type_app_label_model_76bd3d3b_uniq" ON "django_content_type" ("app_label", "model");
+CREATE UNIQUE INDEX "auth_permission_content_type_id_codename_01ab375a_uniq" ON "auth_permission" ("content_type_id", "codename");
+CREATE INDEX IF NOT EXISTS "auth_permission_content_type_id_2f476e4b" ON "auth_permission" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "django_session_expire_date_a5c62663" ON "django_session" ("expire_date");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_object_id_e2d7d1df" ON "taggit_taggeditem" ("object_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_content_type_id_9957a03c" ON "taggit_taggeditem" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_tag_id_f4f5b767" ON "taggit_taggeditem" ("tag_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_content_type_id_object_id_196cc965_idx" ON "taggit_taggeditem" ("content_type_id", "object_id");
+CREATE UNIQUE INDEX "taggit_taggeditem_content_type_id_object_id_tag_id_4bb97a8e_uniq" ON "taggit_taggeditem" ("content_type_id", "object_id", "tag_id");
+CREATE TABLE IF NOT EXISTS "taggit_tag" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(100) NOT NULL UNIQUE, "slug" varchar(100) NOT NULL UNIQUE);
+INSERT INTO "taggit_tag" VALUES(1,'かわいい','kawaii');
+INSERT INTO "taggit_tag" VALUES(2,'おしゃれ','');
+INSERT INTO "taggit_tag" VALUES(3,'かっこいい','_1');
+INSERT INTO "taggit_tag" VALUES(4,'イラスト','_2');
+INSERT INTO "taggit_tag" VALUES(5,'アニメ','_3');
+INSERT INTO "taggit_tag" VALUES(6,'3D','3d');
+INSERT INTO "taggit_tag" VALUES(7,'キネポ','_4');
+INSERT INTO "taggit_tag" VALUES(8,'ダーク','_5');
+INSERT INTO "taggit_tag" VALUES(9,'SciFi','scifi');
+INSERT INTO "taggit_tag" VALUES(10,'ブライト','_6');
+INSERT INTO "taggit_tag" VALUES(11,'シェイプ','_7');
+INSERT INTO "taggit_tag" VALUES(12,'MMD','mmd');
+INSERT INTO "taggit_tag" VALUES(13,'合作','_8');
+CREATE UNIQUE INDEX "auth_group_permissions_group_id_permission_id_0cd325b0_uniq" ON "auth_group_permissions" ("group_id", "permission_id");
+CREATE INDEX IF NOT EXISTS "auth_group_permissions_group_id_b120cbf9" ON "auth_group_permissions" ("group_id");
+CREATE INDEX IF NOT EXISTS "auth_group_permissions_permission_id_84c5c92e" ON "auth_group_permissions" ("permission_id");
+CREATE UNIQUE INDEX "auth_user_groups_user_id_group_id_94350c0c_uniq" ON "auth_user_groups" ("user_id", "group_id");
+CREATE INDEX IF NOT EXISTS "auth_user_groups_user_id_6a12ed8b" ON "auth_user_groups" ("user_id");
+CREATE INDEX IF NOT EXISTS "auth_user_groups_group_id_97559544" ON "auth_user_groups" ("group_id");
+CREATE UNIQUE INDEX "auth_user_user_permissions_user_id_permission_id_14a6b632_uniq" ON "auth_user_user_permissions" ("user_id", "permission_id");
+CREATE INDEX IF NOT EXISTS "auth_user_user_permissions_user_id_a95ead1b" ON "auth_user_user_permissions" ("user_id");
+CREATE INDEX IF NOT EXISTS "auth_user_user_permissions_permission_id_1fbb5f2c" ON "auth_user_user_permissions" ("permission_id");
+CREATE INDEX IF NOT EXISTS "django_admin_log_content_type_id_c4bce8eb" ON "django_admin_log" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "django_admin_log_user_id_c564eba6" ON "django_admin_log" ("user_id");
+CREATE UNIQUE INDEX "django_content_type_app_label_model_76bd3d3b_uniq" ON "django_content_type" ("app_label", "model");
+CREATE UNIQUE INDEX "auth_permission_content_type_id_codename_01ab375a_uniq" ON "auth_permission" ("content_type_id", "codename");
+CREATE INDEX IF NOT EXISTS "auth_permission_content_type_id_2f476e4b" ON "auth_permission" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "django_session_expire_date_a5c62663" ON "django_session" ("expire_date");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_object_id_e2d7d1df" ON "taggit_taggeditem" ("object_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_content_type_id_9957a03c" ON "taggit_taggeditem" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_tag_id_f4f5b767" ON "taggit_taggeditem" ("tag_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_content_type_id_object_id_196cc965_idx" ON "taggit_taggeditem" ("content_type_id", "object_id");
+CREATE UNIQUE INDEX "taggit_taggeditem_content_type_id_object_id_tag_id_4bb97a8e_uniq" ON "taggit_taggeditem" ("content_type_id", "object_id", "tag_id");
+CREATE TABLE IF NOT EXISTS "taggit_taggeditem" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "object_id" integer NOT NULL, "content_type_id" integer NOT NULL REFERENCES "django_content_type" ("id") DEFERRABLE INITIALLY DEFERRED, "tag_id" integer NOT NULL REFERENCES "taggit_tag" ("id") DEFERRABLE INITIALLY DEFERRED);
+INSERT INTO "taggit_taggeditem" VALUES(1,1,1,1);
+INSERT INTO "taggit_taggeditem" VALUES(2,5,1,2);
+INSERT INTO "taggit_taggeditem" VALUES(3,6,1,3);
+INSERT INTO "taggit_taggeditem" VALUES(4,6,1,4);
+INSERT INTO "taggit_taggeditem" VALUES(6,9,1,3);
+INSERT INTO "taggit_taggeditem" VALUES(7,10,1,2);
+INSERT INTO "taggit_taggeditem" VALUES(8,10,1,5);
+INSERT INTO "taggit_taggeditem" VALUES(9,11,1,1);
+INSERT INTO "taggit_taggeditem" VALUES(10,11,1,4);
+INSERT INTO "taggit_taggeditem" VALUES(11,12,1,2);
+INSERT INTO "taggit_taggeditem" VALUES(12,12,1,6);
+INSERT INTO "taggit_taggeditem" VALUES(13,12,1,7);
+INSERT INTO "taggit_taggeditem" VALUES(14,13,1,6);
+INSERT INTO "taggit_taggeditem" VALUES(15,13,1,7);
+INSERT INTO "taggit_taggeditem" VALUES(16,14,1,7);
+INSERT INTO "taggit_taggeditem" VALUES(17,15,1,8);
+INSERT INTO "taggit_taggeditem" VALUES(18,15,1,3);
+INSERT INTO "taggit_taggeditem" VALUES(19,15,1,6);
+INSERT INTO "taggit_taggeditem" VALUES(20,16,1,4);
+INSERT INTO "taggit_taggeditem" VALUES(21,16,1,7);
+INSERT INTO "taggit_taggeditem" VALUES(22,17,1,9);
+INSERT INTO "taggit_taggeditem" VALUES(23,17,1,6);
+INSERT INTO "taggit_taggeditem" VALUES(24,18,1,10);
+INSERT INTO "taggit_taggeditem" VALUES(25,18,1,4);
+INSERT INTO "taggit_taggeditem" VALUES(26,18,1,7);
+INSERT INTO "taggit_taggeditem" VALUES(27,19,1,3);
+INSERT INTO "taggit_taggeditem" VALUES(28,19,1,4);
+INSERT INTO "taggit_taggeditem" VALUES(29,20,1,2);
+INSERT INTO "taggit_taggeditem" VALUES(30,20,1,10);
+INSERT INTO "taggit_taggeditem" VALUES(31,20,1,4);
+INSERT INTO "taggit_taggeditem" VALUES(32,21,1,11);
+INSERT INTO "taggit_taggeditem" VALUES(33,21,1,4);
+INSERT INTO "taggit_taggeditem" VALUES(34,22,1,12);
+INSERT INTO "taggit_taggeditem" VALUES(35,23,1,6);
+INSERT INTO "taggit_taggeditem" VALUES(36,24,1,1);
+INSERT INTO "taggit_taggeditem" VALUES(37,24,1,5);
+INSERT INTO "taggit_taggeditem" VALUES(38,25,1,11);
+INSERT INTO "taggit_taggeditem" VALUES(39,25,1,5);
+INSERT INTO "taggit_taggeditem" VALUES(40,26,1,8);
+INSERT INTO "taggit_taggeditem" VALUES(41,26,1,6);
+INSERT INTO "taggit_taggeditem" VALUES(42,2,1,1);
+INSERT INTO "taggit_taggeditem" VALUES(43,2,1,6);
+INSERT INTO "taggit_taggeditem" VALUES(44,1,1,4);
+INSERT INTO "taggit_taggeditem" VALUES(45,27,1,10);
+INSERT INTO "taggit_taggeditem" VALUES(46,27,1,6);
+INSERT INTO "taggit_taggeditem" VALUES(47,28,1,3);
+INSERT INTO "taggit_taggeditem" VALUES(48,28,1,6);
+INSERT INTO "taggit_taggeditem" VALUES(49,29,1,7);
+INSERT INTO "taggit_taggeditem" VALUES(50,30,1,2);
+INSERT INTO "taggit_taggeditem" VALUES(51,30,1,6);
+INSERT INTO "taggit_taggeditem" VALUES(52,31,1,2);
+INSERT INTO "taggit_taggeditem" VALUES(53,31,1,6);
+INSERT INTO "taggit_taggeditem" VALUES(54,32,1,2);
+INSERT INTO "taggit_taggeditem" VALUES(55,32,1,13);
+INSERT INTO "taggit_taggeditem" VALUES(56,33,1,7);
+INSERT INTO "taggit_taggeditem" VALUES(57,34,1,4);
+INSERT INTO "taggit_taggeditem" VALUES(58,34,1,7);
+INSERT INTO "taggit_taggeditem" VALUES(59,35,1,10);
+INSERT INTO "taggit_taggeditem" VALUES(60,35,1,4);
+INSERT INTO "taggit_taggeditem" VALUES(61,36,1,8);
+INSERT INTO "taggit_taggeditem" VALUES(62,36,1,4);
+INSERT INTO "taggit_taggeditem" VALUES(63,36,1,7);
+INSERT INTO "taggit_taggeditem" VALUES(64,37,1,10);
+INSERT INTO "taggit_taggeditem" VALUES(65,37,1,6);
+INSERT INTO "taggit_taggeditem" VALUES(66,38,1,2);
+INSERT INTO "taggit_taggeditem" VALUES(67,38,1,6);
+INSERT INTO "taggit_taggeditem" VALUES(68,39,1,9);
+INSERT INTO "taggit_taggeditem" VALUES(69,39,1,5);
+INSERT INTO "taggit_taggeditem" VALUES(70,40,1,8);
+INSERT INTO "taggit_taggeditem" VALUES(71,41,1,1);
+INSERT INTO "taggit_taggeditem" VALUES(72,42,1,3);
+INSERT INTO "taggit_taggeditem" VALUES(73,43,1,4);
+INSERT INTO "taggit_taggeditem" VALUES(74,43,1,7);
+INSERT INTO "taggit_taggeditem" VALUES(75,44,1,3);
+INSERT INTO "taggit_taggeditem" VALUES(76,44,1,6);
+INSERT INTO "taggit_taggeditem" VALUES(77,45,1,6);
+INSERT INTO "taggit_taggeditem" VALUES(78,46,1,3);
+INSERT INTO "taggit_taggeditem" VALUES(79,46,1,4);
+INSERT INTO "taggit_taggeditem" VALUES(80,47,1,4);
+INSERT INTO "taggit_taggeditem" VALUES(81,48,1,8);
+INSERT INTO "taggit_taggeditem" VALUES(82,48,1,4);
+INSERT INTO "taggit_taggeditem" VALUES(83,49,1,3);
+INSERT INTO "taggit_taggeditem" VALUES(84,49,1,6);
+INSERT INTO "taggit_taggeditem" VALUES(85,50,1,3);
+INSERT INTO "taggit_taggeditem" VALUES(86,50,1,7);
+INSERT INTO "taggit_taggeditem" VALUES(87,51,1,3);
+INSERT INTO "taggit_taggeditem" VALUES(88,51,1,4);
+INSERT INTO "taggit_taggeditem" VALUES(89,52,1,3);
+INSERT INTO "taggit_taggeditem" VALUES(90,52,1,6);
+INSERT INTO "taggit_taggeditem" VALUES(91,53,1,3);
+INSERT INTO "taggit_taggeditem" VALUES(92,53,1,6);
+CREATE UNIQUE INDEX "auth_group_permissions_group_id_permission_id_0cd325b0_uniq" ON "auth_group_permissions" ("group_id", "permission_id");
+CREATE INDEX IF NOT EXISTS "auth_group_permissions_group_id_b120cbf9" ON "auth_group_permissions" ("group_id");
+CREATE INDEX IF NOT EXISTS "auth_group_permissions_permission_id_84c5c92e" ON "auth_group_permissions" ("permission_id");
+CREATE UNIQUE INDEX "auth_user_groups_user_id_group_id_94350c0c_uniq" ON "auth_user_groups" ("user_id", "group_id");
+CREATE INDEX IF NOT EXISTS "auth_user_groups_user_id_6a12ed8b" ON "auth_user_groups" ("user_id");
+CREATE INDEX IF NOT EXISTS "auth_user_groups_group_id_97559544" ON "auth_user_groups" ("group_id");
+CREATE UNIQUE INDEX "auth_user_user_permissions_user_id_permission_id_14a6b632_uniq" ON "auth_user_user_permissions" ("user_id", "permission_id");
+CREATE INDEX IF NOT EXISTS "auth_user_user_permissions_user_id_a95ead1b" ON "auth_user_user_permissions" ("user_id");
+CREATE INDEX IF NOT EXISTS "auth_user_user_permissions_permission_id_1fbb5f2c" ON "auth_user_user_permissions" ("permission_id");
+CREATE INDEX IF NOT EXISTS "django_admin_log_content_type_id_c4bce8eb" ON "django_admin_log" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "django_admin_log_user_id_c564eba6" ON "django_admin_log" ("user_id");
+CREATE UNIQUE INDEX "django_content_type_app_label_model_76bd3d3b_uniq" ON "django_content_type" ("app_label", "model");
+CREATE UNIQUE INDEX "auth_permission_content_type_id_codename_01ab375a_uniq" ON "auth_permission" ("content_type_id", "codename");
+CREATE INDEX IF NOT EXISTS "auth_permission_content_type_id_2f476e4b" ON "auth_permission" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "django_session_expire_date_a5c62663" ON "django_session" ("expire_date");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_object_id_e2d7d1df" ON "taggit_taggeditem" ("object_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_content_type_id_9957a03c" ON "taggit_taggeditem" ("content_type_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_tag_id_f4f5b767" ON "taggit_taggeditem" ("tag_id");
+CREATE INDEX IF NOT EXISTS "taggit_taggeditem_content_type_id_object_id_196cc965_idx" ON "taggit_taggeditem" ("content_type_id", "object_id");
+CREATE UNIQUE INDEX "taggit_taggeditem_content_type_id_object_id_tag_id_4bb97a8e_uniq" ON "taggit_taggeditem" ("content_type_id", "object_id", "tag_id");
