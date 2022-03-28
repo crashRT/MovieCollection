@@ -56,3 +56,4 @@ WSGI app 0 (mountpoint='') ready in 2 seconds on interpreter 0x6293a8 pid: 7589 
 *** uWSGI is running in multiple interpreter mode ***
 spawned uWSGI worker 1 (and the only) (pid: 7589, cores: 1)
 [pid: 7589|app: 0|req: 1/1] 192.168.11.80 () {54 vars in 922 bytes} [Mon Mar 28 10:31:10 2022] GET / => generated 23508 bytes in 301 msecs (HTTP/1.1 200) 6 headers in 182 bytes (1 switches on core 0)
+
