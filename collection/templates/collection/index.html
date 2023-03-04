@@ -6,75 +6,87 @@
 {% endblock header %}
 
 {% block content %}
-
-<header class="header">
-    <h1>Movie Collection</h1>
-
-
-    {% if taglist %}
-    <div class="taglist">
-        <p class="taglist">タグ一覧</p>
-        <div class="taglistContainer">
-            <ul>
-                <a class="taglist" href={% url 'index' %}>
-                    <li class="taglist">
-                        全て
-                    </li>
-                </a>
-                {% for tag in taglist %}
-                <a class="taglist" href={% url 'taglist' tag.name %}>
-                    <li class="taglist">
-                        {{ tag.name }}
-                    </li>
-                </a>
-                {% endfor %}
-            </ul>
-        </div>
-    </div>
-    {% endif %}
-
-    <div class="headerR">
-        <div class="button">
-            <a href="{% url 'add' %}">
-                <button>追加</button>
-            </a>
-        </div>
-        <a href="{% url 'creators' %}">
-            <div class="CreatorsLink">
-                <p class="CreatorsLink">映像作家一覧</p>
-            </div>
+<header class="header container">
+    <h1>
+        <a class="text-dark text-decoration-none" href="{% url 'index' %}">
+            Movie Collection
         </a>
-        {% if user.is_authenticated %}
-        <p>{{ user.get_username }}でログイン中</p>
-        {% else %}
-        <p>ログインしていません</p>
-        {% endif %}
-    </div>
+    </h1>
+
+    <nav>
+        <div class="row m-3 align-items-center">
+            <section class=" col-sm-auto py-3">
+                {% if taglist %}
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        タグ検索
+                    </button>
+                    <ul class="dropdown-menu">
+                        {% for tag in taglist %}
+                        <li><a class="dropdown-item" href={% url "taglist" tag.name %}>{{tag.name}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+
+                <a href="{% url 'creators' %}">
+                    <div class="CreatorsLink">
+                        <p class="CreatorsLink">映像作家一覧</p>
+                    </div>
+                </a>
+            </section>
+
+            <section class="col p-3">
+                <div class="button">
+                    <a href="{% url 'add' %}">
+                        <button>追加</button>
+                    </a>
+                </div>
+
+                {% if user.is_authenticated %}
+                <p>{{ user.get_username }}でログイン中</p>
+                {% else %}
+                <p>ログインしていません</p>
+                {% endif %}
+            </section>
+        </div>
+    </nav>
 
 </header>
 
-{% if tagname %}
-<h4>タグ：{{ tagname }}</h4>
-{% endif %}
 
-{% if creator %}
-<h4>映像作家：{{ creator }}</h4>
-{% endif %}
+<main>
+    <section class="container">
+        {% if tagname %}
+        <h4>タグ：{{ tagname }}</h4>
+        {% endif %}
 
-{% if movie_list %}
-<div class="MovieList">
-    {% for movie in movie_list %}
-    <a href="{% url 'detail' movie.id %}">
-        <div class="MovieCard">
-            {{ movie.link|safe }}
+        {% if creator %}
+        <h4>映像作家：{{ creator }}</h4>
+        {% endif %}
+    </section>
 
-            <p>{{ movie.title }}</p>
+    {% if movie_list %}
+    <article class="container mb-5 text-center">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+            {% for movie in movie_list %}
+            <div class="col">
+                <a href="{% url 'detail' movie.id %}">
+                    <div class="card MovieCard">
+                        <div class="card-body">
+                            {{ movie.link|safe }}
+                            <p class="my-2">{{ movie.title }}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
         </div>
-    </a>
-    {% endfor %}
-</div>
-{% else %}
-<p>No movies are available.</p>
-{% endif %}
+    </article>
+    {% else %}
+    <p>No movies are available.</p>
+    {% endif %}
+</main>
 
 {% endblock content %}
