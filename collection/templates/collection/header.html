@@ -1,5 +1,5 @@
 <header class="header container">
-    <h1>
+    <h1 class="my-5">
         <a class="text-dark text-decoration-none" href="{% url 'index' %}">
             Movie Collection
         </a>
@@ -7,7 +7,7 @@
 
     <nav>
         <div class="row m-3 align-items-center">
-            <section class=" col-sm-auto py-3">
+            <section class=" col-sm-auto my-3">
                 {% if taglist %}
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle neumo-shadow" type="button"
@@ -23,13 +23,13 @@
                 {% endif %}
 
                 <a href="{% url 'creators' %}">
-                    <div class="CreatorsLink">
+                    <div class="CreatorsLink my-2">
                         <p class="CreatorsLink">映像作家一覧</p>
                     </div>
                 </a>
             </section>
 
-            <section class="col p-3">
+            <section class="col-sm-auto m-3">
                 <div class="button">
                     <a href="{% url 'add' %}">
                         <button class="button">追加</button>
