@@ -7,8 +7,13 @@ Youtube, Vimeo, Twitter, Instagram のつよい映像を一箇所にまとめた
 ## 個人用サーバーの建て方
 自分用のリストがほしい場合
 
-- docker をインストール
-- リポジトリを clone して以下のコマンドを実行
+### 前提
+docker インストール済
+
+### 手順
+- リポジトリを clone する
+- 僕が追加したものを含めたくない場合は `db.sqlite` を削除
+- 以下のコマンドを実行
 ```bash
 docker compose up -d
 ```
