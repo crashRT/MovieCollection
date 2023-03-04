@@ -3,26 +3,24 @@
 {% endblock header %}
 
 {% block content %}
+<h1>映像作品の追加</h1>
+<!-- <form class="" action={% url 'index' %} method="post" enctype="multipart/form-data"> -->
+{% if notice %}
+<p>{{notice}}</p>
+{% endif %}
 
-<main class="container">
-    <h1>映像作品の追加</h1>
-    <!-- <form class="" action={% url 'index' %} method="post" enctype="multipart/form-data"> -->
-    {% if notice %}
-    <p>{{notice}}</p>
+<form method="POST" novalidate>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" name="submit">Submit</button>
+</form>
+<p>
+    タグ一覧：
+    {% if taglist %}
+    {% for tag in taglist %}
+    {{ tag.name }} |
+    {% endfor %}
     {% endif %}
+</p>
 
-    <form method="POST" novalidate>
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" name="submit">Submit</button>
-    </form>
-    <p>
-        タグ一覧：
-        {% if taglist %}
-        {% for tag in taglist %}
-        {{ tag.name }} |
-        {% endfor %}
-        {% endif %}
-    </p>
-</main>
 {% endblock content %}
