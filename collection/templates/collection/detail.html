@@ -29,18 +29,20 @@
 
     <div class="button">
         <a href="{% url 'edit' movie.pk %}">
-            <button>編集</button>
+            <button class="button">編集</button>
         </a>
     </div>
     <div class="button">
         <a href="{% url 'delete_conf' movie.pk %}">
-            <button class="" type="submit">削除</button>
+            <button class="button" type="submit">削除</button>
         </a>
     </div>
 
-    <a href="{% url 'index' %}">
-        <p>TOPへ</p>
-    </a>
+    <div class="button-dark">
+        <a href="{% url 'index' %}">
+            <p class="">TOPへ</p>
+        </a>
+    </div>
 </main>
 
 {% endblock content %}

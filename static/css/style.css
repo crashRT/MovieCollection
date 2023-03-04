@@ -1,5 +1,6 @@
 body {
   background-color: #eff0f1;
+  margin: 0 auto;
 }
 
 /*p {
@@ -20,8 +21,14 @@ a:hover{
   color:#10326b;
 }
 
+.neumo-shadow {
+  border-radius: 5px;
+  border: #e5e5e6 solid 1px;
+  box-shadow: 2px 2px 7px #b9bbbb, -2px -2px 7px #ffffff;
+}
+
 /*ボタンのデザイン*/
-button {
+button.button {
   appearance: none;
   border-radius: 5px;
   background: #eff0f1;
@@ -33,14 +40,14 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+button.button:hover {
   background: #10326b;
   color: #eff0f1;
 }
 
 .button {
   display: block;
-  margin: 10px 100px 10px auto;
+  margin: 20px 0;
 }
 
 div.button{
