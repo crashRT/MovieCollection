@@ -5,44 +5,81 @@
 
 {% block content %}
 
-{% include 'collection/header.html' %}
+<header class="header">
+    <h1>Movie Collection</h1>
 
 
-<main class="container">
-    <h2 class="my-3">{{ movie.title }}</h2>
-
-    {{ movie.link|safe }}
-
-    <p class="my-3 h5">CREATOR: {{ movie.creator }}</p>
-
-    <p>{{ movie.discription|linebreaksbr|urlize }}</p>
-
-    <p>{{ movie.add_by }} が追加</p>
-
-    <p>タグ：
-        {% for tag in tags %}
-        {{ tag }}|
-        {% endfor %}
-
-    </p>
-
-
-    <div class="button">
-        <a href="{% url 'edit' movie.pk %}">
-            <button class="button">編集</button>
-        </a>
+    {% if taglist %}
+    <div class="taglist">
+        <p>タグ一覧</p>
+        <ul>
+            <li class="taglist">
+                <a class="taglist" href={% url 'index' %}>
+                    全て
+                </a>
+            </li>
+            {% for tag in taglist %}
+            <li class="taglist">
+                <a class="taglist" href={% url 'taglist' tag.name %}>
+                    {{ tag.name }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
     </div>
-    <div class="button">
-        <a href="{% url 'delete_conf' movie.pk %}">
-            <button class="button" type="submit">削除</button>
+    {% endif %}
+
+    <div class="headerR">
+        <div class="button">
+            <a href="{% url 'add' %}">
+                <button>追加</button>
+            </a>
+        </div>
+        <a href="{% url 'creators' %}">
+            <div class="CreatorsLink">
+                <p class="CreatorsLink">映像作家一覧</p>
+            </div>
         </a>
+        {% if user.is_authenticated %}
+        <p>{{ user.get_username }}でログイン中</p>
+        {% else %}
+        <p>ログインしていません</p>
+        {% endif %}
     </div>
 
-    <div class="button-dark">
-        <a href="{% url 'index' %}">
-            <p class="">TOPへ</p>
-        </a>
-    </div>
-</main>
+</header>
+
+<h1>{{ movie.title }}</h1>
+
+{{ movie.link|safe }}
+
+<h5>CREATOR: {{ movie.creator }}</h5>
+
+<p>{{ movie.discription|linebreaksbr|urlize }}</p>
+
+<p>{{ movie.add_by }} が追加</p>
+
+<p>タグ：
+    {% for tag in tags %}
+    {{ tag }}|
+    {% endfor %}
+
+</p>
+
+
+<div class="button">
+    <a href="{% url 'edit' movie.pk %}">
+        <button>編集</button>
+    </a>
+</div>
+<div class="button">
+    <a href="{% url 'delete_conf' movie.pk %}">
+        <button class="" type="submit">削除</button>
+    </a>
+</div>
+
+<a href="{% url 'index' %}">
+    <p>TOPへ</p>
+</a>
 
 {% endblock content %}
