@@ -6,8 +6,6 @@
 } 
 
 .MovieCard {
-    width: 160px;
-    margin: 10px;
     padding: 10px;
     border-radius: 10px;
     border-radius: 10px;
@@ -17,6 +15,6 @@
 }
 
 iframe{
-    width: 160px ;
-    height: 90px ;
+    width: 90% ;
+    height: 80%;
 }
