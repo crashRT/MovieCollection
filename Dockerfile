@@ -9,8 +9,8 @@ COPY . /usr/src/app/
 RUN pip install -r requirements.txt
 RUN mkdir -p /var/run/gunicorn
 VOLUME db.sqlite3
-RUN python3 manage.py makemigrations
-RUN python3 manage.py migrate
-RUN python3 manage.py collectstatic --noinput
+RUN python3 manage.py makemigrations &&\
+    python3 manage.py migrate &&\
+    python3 manage.py collectstatic --noinput
 
 CMD ["gunicorn", "MovieCollection.wsgi", "--bind=unix:/var/run/gunicorn/gunicorn.sock"]
