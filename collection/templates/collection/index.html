@@ -9,26 +9,41 @@
 
 {% include 'collection/header.html' %}
 
-{% if tagname %}
-<h4>タグ：{{ tagname }}</h4>
-{% endif %}
 
-{% if creator %}
-<h4>映像作家：{{ creator }}</h4>
-{% endif %}
+<main>
+    <section class="container">
+        {% if tagname %}
+        <h4>タグ：{{ tagname }}</h4>
+        {% endif %}
 
-{% if movie_list %}
-<div class="MovieList">
-    {% for movie in movie_list %}
-    <a href="{% url 'detail' movie.id %}">
-        <div class="MovieCard">
-            {{ movie.link|safe }}
+        {% if creator %}
+        <h4>映像作家：{{ creator }}</h4>
+        {% endif %}
 
-            <p>{{ movie.title }}</p>
+        {% if movie_list %}
+    </section>
+
+    <div class="album py-5">
+        <div class="container">
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+                {% for movie in movie_list %}
+                <div class="col">
+                    <a href="{% url 'detail' movie.id %}">
+                        <div class="card MovieCard text-center">
+                            <div class="card-body">
+                                {{ movie.link|safe }}
+                                <p>{{ movie.title }}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
         </div>
-    </a>
-    {% endfor %}
-</div>
+    </div>
+
+</main>
 {% else %}
 <p>No movies are available.</p>
 {% endif %}
