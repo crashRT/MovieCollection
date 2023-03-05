@@ -16,7 +16,7 @@ env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', 'collection.crashrt.work', 'gunicorn-django']
 
@@ -126,3 +126,5 @@ LOGIN_URL = '/login'
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 USE_X_FORWARDED_HOST = True
 USE_X_FORWARDED_PORT = True
+
+CSRF_TRUSTED_ORIGINS = ['collection.crashrt.work', 'localhost']
