@@ -12,42 +12,43 @@
 <h2 class="py-3">{{ movie.title }}</h2>
 
 {{ movie.link|safe }}
-<main class="container">
+<main>
+    <section class="container">
 
-    <h5 class="py-3">CREATOR: {{ movie.creator }}</h5>
+        <h5 class="py-3">CREATOR: {{ movie.creator }}</h5>
 
-    <p>{{ movie.discription|linebreaksbr|urlize }}</p>
+        <p>{{ movie.discription|linebreaksbr|urlize }}</p>
 
-    <p>{{ movie.add_by }} が追加</p>
+        <p>{{ movie.add_by }} が追加</p>
 
-    <div class="my-3">
-        {% for tag in tags %}
-        <div class="tag-item">
-            {{ tag }}
+        <div class="my-3">
+            {% for tag in tags %}
+            <div class="tag-item">
+                {{ tag }}
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
 
 
-    <div class="btn-group" role="group">
-        <div class="button">
-            <a href="{% url 'edit' movie.pk %}">
-                <button>編集</button>
+        <div class="btn-group" role="group">
+            <div class="button">
+                <a href="{% url 'edit' movie.pk %}">
+                    <button>編集</button>
+                </a>
+            </div>
+            <div class="button">
+                <a href="{% url 'delete_conf' movie.pk %}">
+                    <button class="" type="submit">削除</button>
+                </a>
+            </div>
+        </div>
+
+        <div>
+            <a href="{% url 'index' %}">
+                <p class="text-primary">TOPへ</p>
             </a>
         </div>
-        <div class="button">
-            <a href="{% url 'delete_conf' movie.pk %}">
-                <button class="" type="submit">削除</button>
-            </a>
-        </div>
-    </div>
-
-    <div>
-        <a href="{% url 'index' %}">
-            <p class="text-primary">TOPへ</p>
-        </a>
-    </div>
-
+    </section>
 </main>
 
 {% endblock content %}
