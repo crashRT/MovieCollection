@@ -5,81 +5,50 @@
 
 {% block content %}
 
-<header class="header">
-    <h1>Movie Collection</h1>
+
+{% include 'collection/header.html' %}
 
 
-    {% if taglist %}
-    <div class="taglist">
-        <p>タグ一覧</p>
-        <ul>
-            <li class="taglist">
-                <a class="taglist" href={% url 'index' %}>
-                    全て
-                </a>
-            </li>
-            {% for tag in taglist %}
-            <li class="taglist">
-                <a class="taglist" href={% url 'taglist' tag.name %}>
-                    {{ tag.name }}
-                </a>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-    {% endif %}
-
-    <div class="headerR">
-        <div class="button">
-            <a href="{% url 'add' %}">
-                <button>追加</button>
-            </a>
-        </div>
-        <a href="{% url 'creators' %}">
-            <div class="CreatorsLink">
-                <p class="CreatorsLink">映像作家一覧</p>
-            </div>
-        </a>
-        {% if user.is_authenticated %}
-        <p>{{ user.get_username }}でログイン中</p>
-        {% else %}
-        <p>ログインしていません</p>
-        {% endif %}
-    </div>
-
-</header>
-
-<h1>{{ movie.title }}</h1>
+<h2 class="py-3">{{ movie.title }}</h2>
 
 {{ movie.link|safe }}
+<main>
+    <section class="container">
 
-<h5>CREATOR: {{ movie.creator }}</h5>
+        <h5 class="py-3">CREATOR: {{ movie.creator }}</h5>
 
-<p>{{ movie.discription|linebreaksbr|urlize }}</p>
+        <p>{{ movie.discription|linebreaksbr|urlize }}</p>
 
-<p>{{ movie.add_by }} が追加</p>
+        <p>{{ movie.add_by }} が追加</p>
 
-<p>タグ：
-    {% for tag in tags %}
-    {{ tag }}|
-    {% endfor %}
+        <div class="my-3">
+            {% for tag in tags %}
+            <div class="tag-item">
+                {{ tag }}
+            </div>
+            {% endfor %}
+        </div>
 
-</p>
 
+        <div class="btn-group" role="group">
+            <div class="button">
+                <a href="{% url 'edit' movie.pk %}">
+                    <button>編集</button>
+                </a>
+            </div>
+            <div class="button">
+                <a href="{% url 'delete_conf' movie.pk %}">
+                    <button class="" type="submit">削除</button>
+                </a>
+            </div>
+        </div>
 
-<div class="button">
-    <a href="{% url 'edit' movie.pk %}">
-        <button>編集</button>
-    </a>
-</div>
-<div class="button">
-    <a href="{% url 'delete_conf' movie.pk %}">
-        <button class="" type="submit">削除</button>
-    </a>
-</div>
-
-<a href="{% url 'index' %}">
-    <p>TOPへ</p>
-</a>
+        <div>
+            <a href="{% url 'index' %}">
+                <p class="text-primary">TOPへ</p>
+            </a>
+        </div>
+    </section>
+</main>
 
 {% endblock content %}

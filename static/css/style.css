@@ -50,6 +50,33 @@ div.button{
   margin-bottom: 20px;
 }
 
+.dropdown-toggle {
+  padding: 8px 16px;
+  border-radius: 5px;
+  border: #e5e5e6 solid 1px;
+  background-color: #eff0f1;
+  color : #3e82f8;
+  box-shadow: 2px 2px 7px #b9bbbb, -2px -2px 7px #ffffff;
+}
+
+.dropdown-toggle:hover, .dropdown-toggle:focus {
+  background-color: #10326b;
+  color: #eff0f1;
+}
+
+.dropdown-menu {
+  background-color: #eff0f1;
+  border-radius: 5px;
+}
+
+.dropdown-item:hover {
+  color: #eff0f1;
+  background-color: #3e82f8;
+}
+
+
+
+
 /*映像作家一覧*/
 div.CreatorsLink {
   display: inline-block;
@@ -80,6 +107,20 @@ header::after {
   display: block;
   clear: both;
 }
+
+/*タグ表示*/
+.tag-item {
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: #3e82f8 1px solid;
+  background: #eff0f1;
+  color: #3e82f8;
+  box-shadow: 2px 2px 4px #e3e4e5, -2px -2px 4px #fbfcfd;
+}
+
 
 /*リストのデザイン*/
 li.taglist {

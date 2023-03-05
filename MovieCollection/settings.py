@@ -12,13 +12,13 @@ env.read_env(os.path.join(BASE_DIR, '.env'))
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = 'django-insecure-ahmxp-bfzijoii2_=(ofb17=%n)3l-u-ozlp%^7f&y-an-3ttm'
+# SECRET_KEY = 'django-insecure-ahmxp-bfzijoii2_=(ofb17=%n)3l-u-ozlp%^7f&y-an-3ttm'
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', 'collection.crashrt.work']
+ALLOWED_HOSTS = ['localhost', 'collection.crashrt.work', 'gunicorn-django']
 
 
 # Application definition
@@ -127,3 +127,4 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 USE_X_FORWARDED_HOST = True
 USE_X_FORWARDED_PORT = True
 
+CSRF_TRUSTED_ORIGINS = ['https://collection.crashrt.work', 'http://localhost']

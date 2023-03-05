@@ -7,65 +7,23 @@
 
 {% block content %}
 
-<header class="header">
-    <h1>Movie Collection</h1>
+{% include 'collection/header.html' %}
 
+<main class="container">
+    <h2 class="py-3">映像作家一覧</h2>
 
-    {% if taglist %}
-    <div class="taglist">
-        <p>タグ一覧</p>
-        <ul>
-            <li class="taglist">
-                <a class="taglist" href={% url 'index' %}>
-                    全て
-                </a>
-            </li>
-            {% for tag in taglist %}
-            <li class="taglist">
-                <a class="taglist" href={% url 'taglist' tag.name %}>
-                    {{ tag.name }}
-                </a>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-    {% endif %}
+    {% if collections %}
+    <ul class="creators">
+        {% for object in collections %}
 
-    <div class="headerR">
-        <div class="button">
-            <a href="{% url 'add' %}">
-                <button>追加</button>
+        <li class="creators">
+            <a href="{% url 'works' object %}">
+                {{ object }}
             </a>
-        </div>
-        <a href="{% url 'creators' %}">
-            <div class="CreatorsLink">
-                <p class="CreatorsLink">映像作家一覧</p>
-            </div>
-        </a>
-        {% if user.is_authenticated %}
-        <p>{{ user.get_username }}でログイン中</p>
-        {% else %}
-        <p>ログインしていません</p>
-        {% endif %}
-    </div>
-
-</header>
-
-
-<h2>映像作家一覧</h2>
-
-{% if collections %}
-<ul class="creators">
-    {% for object in collections %}
-
-    <li class="creators">
-        <a href="{% url 'works' object %}">
-            {{ object }}
-        </a>
-    </li>
-    {% endfor %}
-</ul>
-{% endif %}
-
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</main>
 
 {% endblock content %}
