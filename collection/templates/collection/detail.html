@@ -20,12 +20,13 @@
 
     <p>{{ movie.add_by }} が追加</p>
 
-    <p>タグ：
+    <div class="my-3">
         {% for tag in tags %}
-        {{ tag }}|
+        <div class="tag-item">
+            {{ tag }}
+        </div>
         {% endfor %}
-
-    </p>
+    </div>
 
 
     <div class="btn-group" role="group">
