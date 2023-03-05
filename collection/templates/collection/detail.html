@@ -9,37 +9,40 @@
 {% include 'collection/header.html' %}
 
 
-<h1>{{ movie.title }}</h1>
+<h2 class="py-3">{{ movie.title }}</h2>
 
 {{ movie.link|safe }}
+<main class="container">
 
-<h5>CREATOR: {{ movie.creator }}</h5>
+    <h5 class="py-3">CREATOR: {{ movie.creator }}</h5>
 
-<p>{{ movie.discription|linebreaksbr|urlize }}</p>
+    <p>{{ movie.discription|linebreaksbr|urlize }}</p>
 
-<p>{{ movie.add_by }} が追加</p>
+    <p>{{ movie.add_by }} が追加</p>
 
-<p>タグ：
-    {% for tag in tags %}
-    {{ tag }}|
-    {% endfor %}
+    <p>タグ：
+        {% for tag in tags %}
+        {{ tag }}|
+        {% endfor %}
 
-</p>
+    </p>
 
 
-<div class="button">
-    <a href="{% url 'edit' movie.pk %}">
-        <button>編集</button>
+    <div class="button">
+        <a href="{% url 'edit' movie.pk %}">
+            <button>編集</button>
+        </a>
+    </div>
+    <div class="button">
+        <a href="{% url 'delete_conf' movie.pk %}">
+            <button class="" type="submit">削除</button>
+        </a>
+    </div>
+
+    <a href="{% url 'index' %}">
+        <p>TOPへ</p>
     </a>
-</div>
-<div class="button">
-    <a href="{% url 'delete_conf' movie.pk %}">
-        <button class="" type="submit">削除</button>
-    </a>
-</div>
 
-<a href="{% url 'index' %}">
-    <p>TOPへ</p>
-</a>
+</main>
 
 {% endblock content %}
