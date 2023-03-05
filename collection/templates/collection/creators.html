@@ -9,20 +9,21 @@
 
 {% include 'collection/header.html' %}
 
-<h2>映像作家一覧</h2>
+<main class="container">
+    <h2 class="py-3">映像作家一覧</h2>
 
-{% if collections %}
-<ul class="creators">
-    {% for object in collections %}
+    {% if collections %}
+    <ul class="creators">
+        {% for object in collections %}
 
-    <li class="creators">
-        <a href="{% url 'works' object %}">
-            {{ object }}
-        </a>
-    </li>
-    {% endfor %}
-</ul>
-{% endif %}
-
+        <li class="creators">
+            <a href="{% url 'works' object %}">
+                {{ object }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</main>
 
 {% endblock content %}
