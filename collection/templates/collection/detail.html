@@ -28,20 +28,24 @@
     </p>
 
 
-    <div class="button">
-        <a href="{% url 'edit' movie.pk %}">
-            <button>編集</button>
-        </a>
-    </div>
-    <div class="button">
-        <a href="{% url 'delete_conf' movie.pk %}">
-            <button class="" type="submit">削除</button>
-        </a>
+    <div class="btn-group" role="group">
+        <div class="button">
+            <a href="{% url 'edit' movie.pk %}">
+                <button>編集</button>
+            </a>
+        </div>
+        <div class="button">
+            <a href="{% url 'delete_conf' movie.pk %}">
+                <button class="" type="submit">削除</button>
+            </a>
+        </div>
     </div>
 
-    <a href="{% url 'index' %}">
-        <p>TOPへ</p>
-    </a>
+    <div>
+        <a href="{% url 'index' %}">
+            <p class="text-primary">TOPへ</p>
+        </a>
+    </div>
 
 </main>
 
