@@ -127,4 +127,4 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 USE_X_FORWARDED_HOST = True
 USE_X_FORWARDED_PORT = True
 
-CSRF_TRUSTED_ORIGINS = ['collection.crashrt.work', 'localhost']
+CSRF_TRUSTED_ORIGINS = ['https://collection.crashrt.work', 'http://localhost']
