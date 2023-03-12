@@ -5,7 +5,7 @@ from django.views.decorators.http import require_POST
 from taggit.models import Tag
 from django.contrib.auth.models import User
 
-from .models import collection
+from .models import collection, creator
 from .forms import add_movie
 
 # ログイン用
