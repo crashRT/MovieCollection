@@ -32,7 +32,11 @@
             <section class="col-sm-auto m-3">
                 <div class="button">
                     <a href="{% url 'add' %}">
-                        <button class="button">追加</button>
+                        {% if user.is_authenticated %}
+                        <button class="button">作品を追加</button>
+                        {% else %}
+                        <button class="button">ログイン</button>
+                        {% endif %}
                     </a>
                 </div>
 
