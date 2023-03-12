@@ -165,5 +165,4 @@ staticfiles
 nohup.out
 MovieCollection_nginx.conf
 MovieCollection_uwsgi.ini
-
-
+db.sqlite3
